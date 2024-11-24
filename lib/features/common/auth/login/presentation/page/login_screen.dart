@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:post_case_study/features/admin/home/presentation/admin_home.dart';
-import 'package:post_case_study/features/cashier/home/presentation/cashier_home.dart';
+import 'package:go_router/go_router.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/bloc/login_cubit.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/bloc/login_state.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -36,29 +35,41 @@ class LoginPage extends StatelessWidget {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text('Failed')));
         }
+        if (state is LoginStateAdmin) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.go('/admin_home');
+          });
+        } else if (state is LoginStateCashier) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.go('/cashier_home');
+          });
+        }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Welcome Back!',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
-                    color: Colors.blueAccent,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 40),
                 _buildTextField(
-                    label: 'Username', controller: usernameController),
+                    context: context,
+                    label: 'Username',
+                    controller: usernameController),
                 const SizedBox(height: 16),
                 _buildTextField(
                     label: 'Password',
+                    context: context,
                     isPassword: true,
                     controller: passwordController),
                 const SizedBox(height: 24),
@@ -66,20 +77,6 @@ class LoginPage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is LoginStateLoading) {
                       return const Center(child: CircularProgressIndicator());
-                    } else if (state is LoginStateAdmin) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const AdminHome();
-                        },
-                      ));
-                      return const SizedBox.shrink();
-                    } else if (state is LoginStateCashier) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const CashierHome();
-                        },
-                      ));
-                      return const SizedBox.shrink();
                     } else {
                       return ElevatedButton(
                         onPressed: () {
@@ -87,16 +84,19 @@ class LoginPage extends StatelessWidget {
                               usernameController.text, passwordController.text);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                           minimumSize: const Size(double.infinity, 48),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Login',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       );
                     }
@@ -126,43 +126,48 @@ class LoginPage extends StatelessWidget {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text('Failed')));
         }
+        if (state is LoginStateAdmin) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.pop('/admin_home');
+          });
+        } else if (state is LoginStateCashier) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.pop('/cashier_home');
+          });
+        }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
           child: Center(
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.5,
               padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Welcome Back!',
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(height: 32),
                   _buildTextField(
-                      label: 'Username', controller: usernameController),
+                      label: 'Username',
+                      context: context,
+                      controller: usernameController),
                   const SizedBox(height: 24),
                   _buildTextField(
                       label: 'Password',
                       isPassword: true,
+                      context: context,
                       controller: passwordController),
                   const SizedBox(height: 32),
                   BlocBuilder<LoginCubit, LoginState>(
@@ -171,20 +176,6 @@ class LoginPage extends StatelessWidget {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
-                      } else if (state is LoginStateAdmin) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
-                          builder: (context) {
-                            return const AdminHome();
-                          },
-                        ));
-                        return const SizedBox.shrink();
-                      } else if (state is LoginStateCashier) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
-                          builder: (context) {
-                            return const CashierHome();
-                          },
-                        ));
-                        return const SizedBox.shrink();
                       } else {
                         return ElevatedButton(
                           onPressed: () {
@@ -193,7 +184,8 @@ class LoginPage extends StatelessWidget {
                                 passwordController.text);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
                             minimumSize: const Size(double.infinity, 56),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -232,41 +224,46 @@ class LoginPage extends StatelessWidget {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text('Failed')));
         }
+        if (state is LoginStateAdmin) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.go('/admin_home');
+          });
+        } else if (state is LoginStateCashier) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.go('/cashier_home');
+          });
+        }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Center(
           child: Container(
             width: MediaQuery.sizeOf(context).width * 0.4,
             padding: const EdgeInsets.all(40),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
-                ),
-              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   'Welcome Back!',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 32),
                 _buildTextField(
-                    label: 'Username', controller: usernameController),
+                    context: context,
+                    label: 'Username',
+                    controller: usernameController),
                 const SizedBox(height: 24),
                 _buildTextField(
                     label: 'Password',
+                    context: context,
                     isPassword: true,
                     controller: passwordController),
                 const SizedBox(height: 32),
@@ -276,20 +273,6 @@ class LoginPage extends StatelessWidget {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
-                    } else if (state is LoginStateAdmin) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const AdminHome();
-                        },
-                      ));
-                      return const SizedBox.shrink();
-                    } else if (state is LoginStateCashier) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const CashierHome();
-                        },
-                      ));
-                      return const SizedBox.shrink();
                     } else {
                       return ElevatedButton(
                         onPressed: () {
@@ -297,7 +280,8 @@ class LoginPage extends StatelessWidget {
                               usernameController.text, passwordController.text);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                           minimumSize: const Size(double.infinity, 56),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -320,22 +304,19 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // Common TextField Widget
-  Widget _buildTextField({
-    required String label,
-    bool isPassword = false,
-    required TextEditingController controller,
-  }) {
+  Widget _buildTextField(
+      {required BuildContext context,
+      required String label,
+      bool isPassword = false,
+      required TextEditingController controller}) {
     return TextField(
       controller: controller,
       obscureText: isPassword,
       decoration: InputDecoration(
         labelText: label,
-        filled: true,
-        fillColor: Colors.grey[100],
+        labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
         ),
       ),
     );

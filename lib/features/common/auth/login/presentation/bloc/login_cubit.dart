@@ -25,6 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
       }
     } catch (e) {
       emit(LoginStateError());
+      emit(LoginStateIntital());
     }
   }
 }
