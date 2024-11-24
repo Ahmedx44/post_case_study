@@ -39,6 +39,7 @@ dependencies:
   bloc: ^8.1.4
   responsive_builder: 
   go_router: ^14.6.1
+  fl_chart:
   
 
 dev_dependencies:

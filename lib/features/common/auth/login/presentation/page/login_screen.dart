@@ -191,10 +191,12 @@ class LoginPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             'Login',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),
                           ),
                         );
                       }
@@ -287,10 +289,12 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Login',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                       );
                     }
@@ -314,7 +318,7 @@ class LoginPage extends StatelessWidget {
       obscureText: isPassword,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+        labelStyle: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),

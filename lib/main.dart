@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:post_case_study/core/theme/theme.dart';
 import 'package:post_case_study/features/admin/home/presentation/admin_home.dart';
-import 'package:post_case_study/features/cashier/home/presentation/cashier_home.dart';
+import 'package:post_case_study/features/cashier/home/presentation/page/cashier_home.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/page/login_screen.dart';
 
 void main() {

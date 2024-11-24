@@ -17,12 +17,9 @@ class LoginCubit extends Cubit<LoginState> {
 
       if (username == "admin" && password == "password") {
         emit(LoginStateAdmin());
-        print('Sucess');
       } else if (username == "cashier" && password == "password") {
         emit(LoginStateCashier());
-      } else {
-        print('Invalid');
-      }
+      } else {}
     } catch (e) {
       emit(LoginStateError());
       emit(LoginStateIntital());
