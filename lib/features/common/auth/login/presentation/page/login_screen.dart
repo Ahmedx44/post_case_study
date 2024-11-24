@@ -8,95 +8,98 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
 
     return BlocProvider(
       create: (_) => LoginCubit(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
+        body: Center(
           child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Header or any logo can be added here
-                Center(
-                  child: Text(
-                    'Login',
+                // Logo/Illustration Placeholder
+                const Icon(
+                  Icons.login_rounded,
+                  size: 100,
+                  color: Colors.blue,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Welcome Back!",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Login to continue",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: 40),
 
-                // Email Input
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
+                // Email Input Field
+                Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      prefixIcon: const Icon(Icons.email),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 16,
                       ),
                     ),
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 const SizedBox(height: 20),
 
-                // Password Input
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
+                // Password Input Field
+                Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      prefixIcon: const Icon(Icons.lock),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 16,
                       ),
                     ),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
                   ),
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 const SizedBox(height: 20),
 
-                // Login Button
+                // Login Button with BlocConsumer
                 BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
                     if (state is LoginStateError) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            '',
+                            'Error',
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.onError),
+                              color: Theme.of(context).colorScheme.onError,
+                            ),
                           ),
                           backgroundColor: Theme.of(context).colorScheme.error,
                         ),
@@ -112,35 +115,51 @@ class LoginPage extends StatelessWidget {
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    return Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final email = _emailController.text;
-                          final password = _passwordController.text;
-                          context.read<LoginCubit>().login(email, password);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 16.0,
-                            horizontal: 100.0,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                    return FilledButton(
+                      onPressed: () {
+                        final email = emailController.text;
+                        final password = passwordController.text;
+                        context.read<LoginCubit>().login(email, password);
+                      },
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16.0,
+                          horizontal: 24.0,
                         ),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     );
                   },
+                ),
+                const SizedBox(height: 20),
+
+                // Footer Section with Sign-Up Option
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        print('Navigate to Sign-Up Page');
+                      },
+                      child: const Text('Sign Up'),
+                    ),
+                  ],
                 ),
               ],
             ),
