@@ -37,11 +37,11 @@ class LoginPage extends StatelessWidget {
         }
         if (state is LoginStateAdmin) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.go('/admin_home');
+            context.pushReplacement('/admin_home');
           });
         } else if (state is LoginStateCashier) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.go('/cashier_home');
+            context.pushReplacement('/cashier_home');
           });
         }
       },
@@ -128,11 +128,11 @@ class LoginPage extends StatelessWidget {
         }
         if (state is LoginStateAdmin) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.pop('/admin_home');
+            context.pushReplacement('/admin_home');
           });
         } else if (state is LoginStateCashier) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.pop('/cashier_home');
+            context.pushReplacement('/cashier_home');
           });
         }
       },
@@ -228,11 +228,11 @@ class LoginPage extends StatelessWidget {
         }
         if (state is LoginStateAdmin) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.go('/admin_home');
+            context.pushReplacement('/admin_home');
           });
         } else if (state is LoginStateCashier) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.go('/cashier_home');
+            context.pushReplacement('/cashier_home');
           });
         }
       },

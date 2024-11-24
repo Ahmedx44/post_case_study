@@ -6,6 +6,7 @@ final ThemeData lightMode = ThemeData(
       primary: const Color.fromRGBO(118, 85, 250, 1.0),
       secondary: Colors.grey[300]!,
       surface: Colors.white,
+      onSurface: const Color.fromARGB(255, 26, 26, 26),
       onPrimary: Colors.black,
       tertiary: const Color(0xFFF3F3F3),
     ),
