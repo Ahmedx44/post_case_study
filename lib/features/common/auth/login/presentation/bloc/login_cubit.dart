@@ -16,9 +16,12 @@ class LoginCubit extends Cubit<LoginState> {
       await Future.delayed(const Duration(seconds: 2));
 
       if (username == "admin" && password == "password") {
-        emit(LoginStateLoaded());
+        emit(LoginStateAdmin());
+        print('Sucess');
+      } else if (username == "cashier" && password == "password") {
+        emit(LoginStateCashier());
       } else {
-        emit(LoginStateError());
+        print('Invalid');
       }
     } catch (e) {
       emit(LoginStateError());
