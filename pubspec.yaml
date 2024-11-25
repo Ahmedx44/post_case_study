@@ -19,7 +19,7 @@ dependencies:
   hugeicons: 
   fl_chart: ^0.55.0
   sidebarx: ^0.17.1
-  firebase_core: ^3.8.0
+
 
 dev_dependencies:
   flutter_test:

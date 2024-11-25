@@ -1,69 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:sidebarx/sidebarx.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      width: 100,
-      child: SidebarX(
-        showToggleButton: false,
-        controller: SidebarXController(selectedIndex: 0),
-        theme: SidebarXTheme(
-            margin: const EdgeInsets.all(0),
-            itemDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+    return BlocBuilder<CashierCubit, CashierState>(
+      builder: (context, state) {
+        final cubit = context.read<CashierCubit>();
+
+        // Helper function for creating styled tiles
+        Widget buildTile({
+          required String title,
+          required IconData icon,
+          required int index,
+        }) {
+          final isSelected = state.selectedIndex == index;
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? const Color.fromARGB(255, 206, 228, 251)
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(15),
             ),
-            selectedItemDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey.withOpacity(0.1),
-            ),
-            iconTheme: IconThemeData(
-              color: Colors.black.withOpacity(0.7),
-              size: 24,
-            ),
-            selectedIconTheme: const IconThemeData(
-              color: Colors.black,
-              size: 24,
-            ),
-            width: 50),
-        headerBuilder: (context, extended) {
-          return const Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Center(
-                child: Text(
-                  'Haron',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            child: ListTile(
+              title: Text(
+                title,
+                style: TextStyle(
+                  color: isSelected ? Colors.lightBlue : Colors.black,
                 ),
               ),
-            ],
+              leading: Icon(
+                icon,
+                color: isSelected ? Colors.lightBlue : Colors.black,
+              ),
+              onTap: () => cubit.onItemTapped(index),
+            ),
           );
-        },
-        items: const [
-          SidebarXItem(
-            icon: HugeIcons.strokeRoundedHome01,
-            label: 'Home',
+        }
+
+        return Drawer(
+          child: Column(
+            children: [
+              const DrawerHeader(
+                child: Text('Haron'),
+              ),
+              buildTile(
+                  title: 'Home', icon: HugeIcons.strokeRoundedHome02, index: 0),
+              buildTile(
+                  title: 'Orders',
+                  icon: HugeIcons.strokeRoundedInvoice,
+                  index: 1),
+              buildTile(
+                  title: 'Items',
+                  icon: HugeIcons.strokeRoundedGroupItems,
+                  index: 2),
+              buildTile(
+                  title: 'Setting',
+                  icon: HugeIcons.strokeRoundedSettings01,
+                  index: 3),
+            ],
           ),
-          SidebarXItem(
-            icon: HugeIcons.strokeRoundedSearch01,
-            label: 'Search',
-          ),
-          SidebarXItem(
-            icon: HugeIcons.strokeRoundedPeerToPeer01,
-            label: 'People',
-          ),
-          SidebarXItem(
-            icon: HugeIcons.strokeRoundedFavourite,
-            label: 'Favorite',
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
