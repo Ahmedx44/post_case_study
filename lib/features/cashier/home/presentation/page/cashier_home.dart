@@ -36,13 +36,14 @@ class CashierHome extends StatelessWidget {
             return Container(
               child: Row(
                 children: [
-                  // Sidebar (Drawer) for Desktop
+                  // Sidebar  for Desktop
                   if (isDesktop)
                     Container(
                       width: 250,
                       color: Theme.of(context).colorScheme.primary,
                       child: const CustomDrawer(),
                     ),
+
                   // Main content area
                   Expanded(
                     child: Column(

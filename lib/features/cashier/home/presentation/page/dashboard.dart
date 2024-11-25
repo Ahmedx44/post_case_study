@@ -8,100 +8,137 @@ class CashierDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.5,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.secondary,
-                      prefixIcon: Icon(HugeIcons.strokeRoundedSearch02,
-                          color: Theme.of(context).iconTheme.color),
-                      hintText: 'Search...',
-                      hintStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Search Bar
+            TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                prefixIcon: Icon(
+                  HugeIcons.strokeRoundedSearch02,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                hintText: 'Search...',
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 2,
                   ),
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.05,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Text(
-                  'Category',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
               ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DefaultTabController(
-                  length: 4,
-                  child: Column(
-                    children: [
-                      ButtonsTabBar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        unselectedBackgroundColor: Colors.grey[300],
-                        unselectedLabelStyle:
-                            const TextStyle(color: Colors.black),
-                        labelStyle: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                        tabs: const [
-                          Tab(
-                            icon: Icon(Icons.all_inbox),
-                            text: "All",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+            const SizedBox(height: 24),
+            // Category Title
+            const Text(
+              'Category',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(height: 16),
+            // Tab Section
+            Expanded(
+              child: DefaultTabController(
+                length: 4,
+                child: Column(
+                  children: [
+                    ButtonsTabBar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      unselectedBackgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                      unselectedLabelStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                      ),
+                      labelStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      tabs: const [
+                        Tab(
+                          icon: Icon(Icons.all_inbox),
+                          text: "All",
+                        ),
+                        Tab(
+                          icon: Icon(Icons.computer),
+                          text: "Computer",
+                        ),
+                        Tab(
+                          icon: Icon(Icons.phone),
+                          text: "Phone",
+                        ),
+                        Tab(
+                          icon: Icon(Icons.food_bank),
+                          text: "Food",
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    // Tab View Content
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          Center(
+                            child: Text(
+                              "All Items",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
                           ),
-                          Tab(
-                            icon: Icon(Icons.computer),
-                            text: "Computer",
+                          Center(
+                            child: Text(
+                              "Computer Items",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
                           ),
-                          Tab(
-                            icon: Icon(Icons.phone),
-                            text: "Phone",
+                          Center(
+                            child: Text(
+                              "Phone Items",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
                           ),
-                          Tab(
-                            icon: Icon(Icons.food_bank),
-                            text: "Food",
+                          Center(
+                            child: Text(
+                              "Food Items",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      const TabBarView(children: [Text('All'), Text('dash')])
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

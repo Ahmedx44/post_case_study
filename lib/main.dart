@@ -4,8 +4,10 @@ import 'package:post_case_study/core/theme/theme.dart';
 import 'package:post_case_study/features/admin/home/presentation/admin_home.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/cashier_home.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/page/login_screen.dart';
+import 'package:post_case_study/locator.dart';
 
-void main() {
+void main() async {
+  setupLocator();
   runApp(const MyApp());
 }
 

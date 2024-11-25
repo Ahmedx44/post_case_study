@@ -1,0 +1,133 @@
+[
+    {
+      "category": "Fruits",
+      "items": [
+        {
+          "id": 1,
+          "name": "Apple",
+          "description": "Fresh and juicy red apples.",
+          "price": 3.5,
+          "image_url": "https://via.placeholder.com/150?text=Apple"
+        },
+        {
+          "id": 2,
+          "name": "Banana",
+          "description": "Sweet and ripe bananas.",
+          "price": 1.2,
+          "image_url": "https://via.placeholder.com/150?text=Banana"
+        },
+        {
+          "id": 3,
+          "name": "Orange",
+          "description": "Citrusy and vitamin-rich oranges.",
+          "price": 2.5,
+          "image_url": "https://via.placeholder.com/150?text=Orange"
+        }
+      ]
+    },
+    {
+      "category": "Vegetables",
+      "items": [
+        {
+          "id": 4,
+          "name": "Carrot",
+          "description": "Fresh and crunchy carrots.",
+          "price": 1.8,
+          "image_url": "https://via.placeholder.com/150?text=Carrot"
+        },
+        {
+          "id": 5,
+          "name": "Broccoli",
+          "description": "Fresh green broccoli.",
+          "price": 2.0,
+          "image_url": "https://via.placeholder.com/150?text=Broccoli"
+        },
+        {
+          "id": 6,
+          "name": "Potato",
+          "description": "Farm-fresh potatoes.",
+          "price": 0.9,
+          "image_url": "https://via.placeholder.com/150?text=Potato"
+        }
+      ]
+    },
+    {
+      "category": "Dairy",
+      "items": [
+        {
+          "id": 7,
+          "name": "Milk",
+          "description": "Full cream fresh milk.",
+          "price": 1.5,
+          "image_url": "https://via.placeholder.com/150?text=Milk"
+        },
+        {
+          "id": 8,
+          "name": "Cheese",
+          "description": "Rich and creamy cheese.",
+          "price": 4.0,
+          "image_url": "https://via.placeholder.com/150?text=Cheese"
+        },
+        {
+          "id": 9,
+          "name": "Butter",
+          "description": "Smooth and salted butter.",
+          "price": 2.5,
+          "image_url": "https://via.placeholder.com/150?text=Butter"
+        }
+      ]
+    },
+    {
+      "category": "Snacks",
+      "items": [
+        {
+          "id": 10,
+          "name": "Chips",
+          "description": "Crunchy potato chips.",
+          "price": 1.8,
+          "image_url": "https://via.placeholder.com/150?text=Chips"
+        },
+        {
+          "id": 11,
+          "name": "Cookies",
+          "description": "Delicious chocolate chip cookies.",
+          "price": 2.5,
+          "image_url": "https://via.placeholder.com/150?text=Cookies"
+        },
+        {
+          "id": 12,
+          "name": "Popcorn",
+          "description": "Buttery and salty popcorn.",
+          "price": 1.2,
+          "image_url": "https://via.placeholder.com/150?text=Popcorn"
+        }
+      ]
+    },
+    {
+      "category": "Beverages",
+      "items": [
+        {
+          "id": 13,
+          "name": "Coca Cola",
+          "description": "Refreshing cola drink.",
+          "price": 1.0,
+          "image_url": "https://via.placeholder.com/150?text=Coca+Cola"
+        },
+        {
+          "id": 14,
+          "name": "Orange Juice",
+          "description": "Pure and fresh orange juice.",
+          "price": 3.0,
+          "image_url": "https://via.placeholder.com/150?text=Orange+Juice"
+        },
+        {
+          "id": 15,
+          "name": "Water",
+          "description": "Clean and pure drinking water.",
+          "price": 0.5,
+          "image_url": "https://via.placeholder.com/150?text=Water"
+        }
+      ]
+    }
+  ]
+  
