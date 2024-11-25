@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -7,82 +8,66 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: MediaQuery.sizeOf(context).width * 0.15,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Container(
-            height: 100,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: const Text(
-              'Haron',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+      child: SidebarX(
+        controller: SidebarXController(selectedIndex: 0),
+        theme: SidebarXTheme(
+          margin: const EdgeInsets.all(0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
           ),
-          ListTile(
-            leading:
-                const Icon(HugeIcons.strokeRoundedHome01, color: Colors.black),
-            title: const Text(
-              'Home',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {},
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            horizontalTitleGap: 10,
+          textStyle: TextStyle(color: Colors.black.withOpacity(0.7)),
+          selectedTextStyle: const TextStyle(color: Colors.black),
+          itemTextPadding: const EdgeInsets.symmetric(horizontal: 20),
+          selectedItemTextPadding: const EdgeInsets.symmetric(horizontal: 20),
+          itemDecoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
           ),
-          ListTile(
-            leading:
-                const Icon(HugeIcons.strokeRoundedInvoice, color: Colors.black),
-            title: const Text(
-              'Invoices',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {},
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            horizontalTitleGap: 10,
+          selectedItemDecoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.grey.withOpacity(0.1),
           ),
-          ListTile(
-            leading: const Icon(HugeIcons.strokeRoundedGroupItems,
-                color: Colors.black),
-            title: const Text(
-              'Items',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () {},
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            horizontalTitleGap: 10,
+          iconTheme: IconThemeData(
+            color: Colors.black.withOpacity(0.7),
+            size: 24,
           ),
-          ListTile(
-            leading: const Icon(HugeIcons.strokeRoundedSetting06,
-                color: Colors.black),
-            title: const Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
+          selectedIconTheme: const IconThemeData(
+            color: Colors.black,
+            size: 24,
+          ),
+        ),
+        extendedTheme: const SidebarXTheme(
+          width: 60,
+        ),
+        headerBuilder: (context, extended) {
+          return const SizedBox(
+            height: 80,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text('Haron'),
             ),
+          );
+        },
+        items: [
+          SidebarXItem(
+            icon: HugeIcons.strokeRoundedHome01,
+            label: 'Home',
+            onTap: () {
+              debugPrint('Home');
+            },
+          ),
+          const SidebarXItem(
+            icon: HugeIcons.strokeRoundedSearch01,
+            label: 'Search',
+          ),
+          const SidebarXItem(
+            icon: HugeIcons.strokeRoundedPeerToPeer01,
+            label: 'People',
+          ),
+          SidebarXItem(
+            icon: HugeIcons.strokeRoundedFavourite,
+            label: 'Favorites',
+            selectable: false,
             onTap: () {},
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            horizontalTitleGap: 10,
           ),
         ],
       ),

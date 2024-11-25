@@ -4,7 +4,7 @@ final ThemeData lightMode = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme.light(
       primary: const Color.fromRGBO(118, 85, 250, 1.0),
-      secondary: Colors.grey[300]!,
+      secondary: Colors.grey[50]!,
       surface: Colors.white,
       onSurface: const Color.fromARGB(255, 26, 26, 26),
       onPrimary: Colors.black,
