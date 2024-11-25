@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -50,19 +47,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD9FsmNxunkLIoWTTY9DaUdOMmeNB7LWGo',
-    appId: '1:998050821033:android:0abb1a5e39abd777de4ab8',
-    messagingSenderId: '998050821033',
-    projectId: 'rentify-44486',
-    storageBucket: 'rentify-44486.appspot.com',
+    apiKey: 'AIzaSyAyaIac3SDRbSMCTd9WuEjMrz0gX-8wGY4',
+    appId: '1:595650006865:android:ec02c266cc121fac2e0d70',
+    messagingSenderId: '595650006865',
+    projectId: 'sales-75413',
+    storageBucket: 'sales-75413.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCosZvA1EeMrq6MyQHCrSfdah-U7sYLewo',
-    appId: '1:998050821033:web:afd4a934eb9a5afade4ab8',
-    messagingSenderId: '998050821033',
-    projectId: 'rentify-44486',
-    authDomain: 'rentify-44486.firebaseapp.com',
-    storageBucket: 'rentify-44486.appspot.com',
+    apiKey: 'AIzaSyDLMR5ctmn6WEM54snbnP8mOsvSz87jiCM',
+    appId: '1:595650006865:web:af766b2af64027bd2e0d70',
+    messagingSenderId: '595650006865',
+    projectId: 'sales-75413',
+    authDomain: 'sales-75413.firebaseapp.com',
+    storageBucket: 'sales-75413.firebasestorage.app',
+    measurementId: 'G-JFEGBSSNZT',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDLMR5ctmn6WEM54snbnP8mOsvSz87jiCM',
+    appId: '1:595650006865:web:6ba375b20a4b82cb2e0d70',
+    messagingSenderId: '595650006865',
+    projectId: 'sales-75413',
+    authDomain: 'sales-75413.firebaseapp.com',
+    storageBucket: 'sales-75413.firebasestorage.app',
+    measurementId: 'G-8TF30QJPKT',
+  );
+
 }

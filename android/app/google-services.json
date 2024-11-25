@@ -1,40 +1,21 @@
 {
   "project_info": {
-    "project_number": "998050821033",
-    "project_id": "rentify-44486",
-    "storage_bucket": "rentify-44486.appspot.com"
+    "project_number": "595650006865",
+    "project_id": "sales-75413",
+    "storage_bucket": "sales-75413.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:998050821033:android:0abb1a5e39abd777de4ab8",
+        "mobilesdk_app_id": "1:595650006865:android:ec02c266cc121fac2e0d70",
         "android_client_info": {
-          "package_name": "com.example.post_"
+          "package_name": "com.example.post_case_study"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD9FsmNxunkLIoWTTY9DaUdOMmeNB7LWGo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:998050821033:android:80ce938506a6d2fede4ab8",
-        "android_client_info": {
-          "package_name": "com.example.rentify"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD9FsmNxunkLIoWTTY9DaUdOMmeNB7LWGo"
+          "current_key": "AIzaSyAyaIac3SDRbSMCTd9WuEjMrz0gX-8wGY4"
         }
       ],
       "services": {

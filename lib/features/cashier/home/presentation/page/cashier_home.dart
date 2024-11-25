@@ -14,7 +14,6 @@ class CashierHome extends StatelessWidget {
       appBar: isDesktop
           ? null
           : AppBar(
-              title: const Text("Haron"),
               leading: Builder(
                 builder: (context) => IconButton(
                   icon: const Icon(Icons.menu),
@@ -30,7 +29,7 @@ class CashierHome extends StatelessWidget {
           if (isDesktop) const CustomDrawer(),
           const Expanded(
             child: Center(
-              child: Text("Cashier Home Content"), // Main content area
+              child: Text("Cashier Home Content"),
             ),
           ),
         ],
