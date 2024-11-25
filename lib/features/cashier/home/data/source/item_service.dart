@@ -19,10 +19,12 @@ class ItemServiceImpl extends ItemService {
       // Decode JSON string into a dynamic list
       final List<dynamic> jsonData = json.decode(jsonString);
 
-      // Map the JSON list to a List<Item>
+      // Flatten and map nested items to a List<Item>
       final List<Item> items = jsonData
-          .map((item) =>
-              Item.fromJson(item as Map<String, dynamic>, item['category']))
+          .expand((category) => (category['items'] as List<dynamic>).map(
+                (item) => Item.fromJson(
+                    item as Map<String, dynamic>, category['category']),
+              ))
           .toList();
 
       // Return the list wrapped in a Right (indicating success)

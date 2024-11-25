@@ -15,15 +15,15 @@ class Item {
     required this.category,
   });
 
-  // Factory method to create an Item from JSON
   factory Item.fromJson(Map<String, dynamic> json, String category) {
     return Item(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      price: json['price'].toDouble(),
-      imageUrl: json['image_url'],
-      category: category,
+      id: json['id'] ?? 0, // Provide a default value if id is null
+      name: json['name'] ?? 'Unknown', // Default for name
+      description: json['description'] ?? '', // Default for description
+      price: (json['price'] as num?)?.toDouble() ??
+          0.0, // Handle null or invalid price
+      imageUrl: json['image_url'] ?? '', // Default for imageUrl
+      category: category, // Category from the parameter
     );
   }
 }

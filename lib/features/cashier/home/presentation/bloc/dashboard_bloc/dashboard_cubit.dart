@@ -11,8 +11,10 @@ class DashboardCubit extends Cubit<DashboardState> {
   Future getItem() async {
     emit(DashboardStateLoading());
     print('Fetching');
+
     final result = await getItemUsecase();
     result.fold((error) {
+      print(error);
       emit(DashboardStateError(error: error));
     }, (success) {
       emit(DashboardStateLoaded(items: success));
