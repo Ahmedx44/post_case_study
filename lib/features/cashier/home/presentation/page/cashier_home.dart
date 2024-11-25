@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:post_case_study/core/util/responsive.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
+import 'package:post_case_study/features/cashier/home/presentation/page/dashboard.dart';
 import 'package:post_case_study/features/cashier/home/presentation/widget/custom_drawer.dart';
 
 class CashierHome extends StatelessWidget {
@@ -16,7 +17,7 @@ class CashierHome extends StatelessWidget {
       create: (_) => CashierCubit(),
       child: Scaffold(
         drawer: isDesktop ? null : const CustomDrawer(),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: isDesktop
             ? null
             : AppBar(
@@ -32,22 +33,37 @@ class CashierHome extends StatelessWidget {
         body: BlocBuilder<CashierCubit, CashierState>(
           builder: (context, state) {
             final cubit = context.read<CashierCubit>();
-            return Row(
-              children: [
-                if (isDesktop) const CustomDrawer(),
-                Expanded(
-                  child: PageView(
-                    controller: cubit.pageController,
-                    onPageChanged: cubit.onItemTapped,
-                    children: const [
-                      Center(child: Text('Home Page')),
-                      Center(child: Text('Search Page')),
-                      Center(child: Text('People Page')),
-                      Center(child: Text('Favorites Page')),
-                    ],
+            return Container(
+              child: Row(
+                children: [
+                  // Sidebar (Drawer) for Desktop
+                  if (isDesktop)
+                    Container(
+                      width: 250,
+                      color: Theme.of(context).colorScheme.primary,
+                      child: const CustomDrawer(),
+                    ),
+                  // Main content area
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: PageView(
+                            controller: cubit.pageController,
+                            onPageChanged: cubit.onItemTapped,
+                            children: const [
+                              CashierDashboard(),
+                              Center(child: Text('Search Page')),
+                              Center(child: Text('People Page')),
+                              Center(child: Text('Favorites Page')),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),

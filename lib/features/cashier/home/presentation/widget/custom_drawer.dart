@@ -13,7 +13,6 @@ class CustomDrawer extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CashierCubit>();
 
-        // Helper function for creating styled tiles
         Widget buildTile({
           required String title,
           required IconData icon,
