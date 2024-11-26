@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:post_case_study/features/cashier/home/data/model/item.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_state.dart';
 
 class CustomCard extends StatelessWidget {
   final Item item;
@@ -66,21 +69,37 @@ class CustomCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             // Add to Cart Button
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.primary),
-              child: Center(
-                child: Text(
-                  'Add to Cart',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17),
-                ),
-              ),
-            )
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () async {
+                    context.read<CartCubit>().addToCart(
+                          item.name,
+                          item.price,
+                          item.imageUrl,
+                          item.category,
+                        );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

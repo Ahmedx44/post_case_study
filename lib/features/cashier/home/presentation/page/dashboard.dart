@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 import 'package:post_case_study/features/cashier/home/domain/usecase/get_item_usecase.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboard_bloc/dashboard_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboard_bloc/dashboard_state.dart';
 import 'package:post_case_study/features/cashier/home/presentation/widget/custom_card.dart';
@@ -200,7 +201,8 @@ class _CashierDashboardState extends State<CashierDashboard> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        return CustomCard(item: item);
+        return BlocProvider(
+            create: (context) => CartCubit(), child: CustomCard(item: item));
       },
     );
   }

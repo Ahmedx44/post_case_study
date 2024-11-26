@@ -87,7 +87,7 @@ class CartWidget extends StatelessWidget {
   double _calculateTotal(List<CartItem> items) {
     double total = 0;
     for (var item in items) {
-      total += item.price * item.quantity;
+      total += item.price * int.parse(item.quantity);
     }
     return total;
   }
@@ -97,7 +97,7 @@ class CartItem {
   final String name;
   final double price;
   final String imageUrl;
-  final int quantity;
+  final String quantity;
 
   CartItem({
     required this.name,

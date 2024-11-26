@@ -9,4 +9,11 @@ class ItemRepositoryImpl extends ItemReposiotry {
   Future<Either<String, List<Item>>> getAllItems() async {
     return await locator<ItemService>().getAllItems();
   }
+
+  @override
+  Future<Either<String, String>> addItemToCart(
+      String name, double price, String imageUrl, String quantity) async {
+    return await locator<ItemService>()
+        .addItemToCart(name, price, imageUrl, quantity);
+  }
 }
