@@ -12,7 +12,7 @@ class CartWidget extends StatelessWidget {
     Box<CartItem> cartBox = Hive.box<CartItem>('cart');
 
     return Container(
-      width: MediaQuery.sizeOf(context).width * 0.25,
+      width: 300,
       color: Theme.of(context).colorScheme.surfaceVariant,
       padding: const EdgeInsets.all(16.0),
       child: Column(
