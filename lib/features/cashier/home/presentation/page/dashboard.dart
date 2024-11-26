@@ -9,8 +9,16 @@ import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboar
 import 'package:post_case_study/features/cashier/home/presentation/widget/custom_card.dart';
 import 'package:post_case_study/locator.dart';
 
-class CashierDashboard extends StatelessWidget {
+class CashierDashboard extends StatefulWidget {
   const CashierDashboard({super.key});
+
+  @override
+  State<CashierDashboard> createState() => _CashierDashboardState();
+}
+
+class _CashierDashboardState extends State<CashierDashboard> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = "";
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +32,13 @@ class CashierDashboard extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is DashboardStateLoaded) {
+            // Filter items based on search query
+            final filteredItems = state.items
+                .where((item) => item.name
+                    .toLowerCase()
+                    .contains(_searchQuery.toLowerCase()))
+                .toList();
+
             return Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -32,6 +47,12 @@ class CashierDashboard extends StatelessWidget {
                   children: [
                     // Search Bar
                     TextField(
+                      controller: _searchController,
+                      onChanged: (value) {
+                        setState(() {
+                          _searchQuery = value;
+                        });
+                      },
                       decoration: InputDecoration(
                         filled: true,
                         fillColor:
@@ -105,11 +126,11 @@ class CashierDashboard extends StatelessWidget {
                               child: TabBarView(
                                 children: [
                                   // All Items
-                                  _buildGridView(context, state.items),
+                                  _buildGridView(context, filteredItems),
                                   // Computer Items
                                   _buildGridView(
                                     context,
-                                    state.items
+                                    filteredItems
                                         .where((item) =>
                                             item.category == 'Computer')
                                         .toList(),
@@ -117,7 +138,7 @@ class CashierDashboard extends StatelessWidget {
                                   // Phone Items
                                   _buildGridView(
                                     context,
-                                    state.items
+                                    filteredItems
                                         .where(
                                             (item) => item.category == 'Phone')
                                         .toList(),
@@ -125,7 +146,7 @@ class CashierDashboard extends StatelessWidget {
                                   // Food Items
                                   _buildGridView(
                                     context,
-                                    state.items
+                                    filteredItems
                                         .where(
                                             (item) => item.category == 'Food')
                                         .toList(),
@@ -157,8 +178,18 @@ class CashierDashboard extends StatelessWidget {
 
   Widget _buildGridView(BuildContext context, List<Item> items) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final crossAxisCount = screenWidth > 600 ? 4 : 3;
-    final childAspectRatio = screenWidth > 600 ? 2.5 : 2.2;
+
+    final crossAxisCount = screenWidth > 600
+        ? 4 // More items per row on large screens
+        : screenWidth > 400
+            ? 3 // Medium screens
+            : 2; // Small screens
+
+    final childAspectRatio = screenWidth > 600
+        ? 1.0
+        : screenWidth > 400
+            ? 0.9 // Compact for medium screens
+            : 0.8; // Tightest layout for small screens
 
     return GridView.builder(
       padding: const EdgeInsets.all(8.0),
@@ -171,7 +202,7 @@ class CashierDashboard extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        return CustomerCard(item: item);
+        return CustomCard(item: item);
       },
     );
   }
