@@ -6,10 +6,11 @@ import 'package:post_case_study/locator.dart';
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartStateError());
 
-  addToCart(String name, double price, String imageUrl, String quantity) async {
+  addToCart(String name, double price, String imageUrl, String quantity,
+      String category) async {
     emit(CartStateLoading());
-    final result =
-        await locator<AddToCartUseCase>().call(name, price, imageUrl, quantity);
+    final result = await locator<AddToCartUseCase>()
+        .call(name, price, imageUrl, quantity, category);
 
     result.fold((error) {
       emit(CartStateError());

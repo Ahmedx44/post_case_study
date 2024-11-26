@@ -185,7 +185,7 @@ class _CashierDashboardState extends State<CashierDashboard> {
             : 2;
 
     final childAspectRatio = screenWidth > 600
-        ? 1.0
+        ? 0.7
         : screenWidth > 400
             ? 0.9
             : 0.8;

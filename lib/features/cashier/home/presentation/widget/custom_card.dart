@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_state.dart';
@@ -73,12 +74,10 @@ class CustomCard extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () async {
-                    context.read<CartCubit>().addToCart(
-                          item.name,
-                          item.price,
-                          item.imageUrl,
-                          item.category,
-                        );
+                    print('tapped');
+                    context.read<CartCubit>().addToCart(item.name, item.price,
+                        item.imageUrl, item.category, item.category);
+                    print(Hive.box('cart').values);
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),

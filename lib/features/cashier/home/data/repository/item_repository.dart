@@ -11,9 +11,9 @@ class ItemRepositoryImpl extends ItemReposiotry {
   }
 
   @override
-  Future<Either<String, String>> addItemToCart(
-      String name, double price, String imageUrl, String quantity) async {
+  Future<Either<String, String>> addItemToCart(String name, double price,
+      String imageUrl, String quantity, String category) async {
     return await locator<ItemService>()
-        .addItemToCart(name, price, imageUrl, quantity);
+        .addItemToCart(name, price, imageUrl, quantity, category);
   }
 }

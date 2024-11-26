@@ -76,11 +76,7 @@ class CashierHome extends StatelessWidget {
                     ),
                   ),
 
-                  // Right side Cart section (only for desktop)
-                  if (isDesktop)
-                    const CartWidget(
-                      cartItems: [], // Add the cart items here
-                    ),
+                  if (isDesktop) CartWidget(),
                 ],
               ),
             );
@@ -96,7 +92,7 @@ class CashierHome extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return const CartWidget(cartItems: []); // Pass the cart items here
+        return CartWidget(); // Pass the cart items here
       },
     );
   }

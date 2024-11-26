@@ -3,13 +3,18 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
 import 'package:post_case_study/features/cashier/home/data/model/item.dart';
-import 'package:post_case_study/features/cashier/home/presentation/widget/cart_widget.dart';
 
 abstract class ItemService {
   Future<Either<String, List<Item>>> getAllItems();
   Future<Either<String, String>> addItemToCart(
-      String name, double price, String imageUrl, String quantity);
+    String name,
+    double price,
+    String imageUrl,
+    String quantity, // Matches here
+    String category,
+  );
 }
 
 class ItemServiceImpl extends ItemService {
@@ -36,16 +41,25 @@ class ItemServiceImpl extends ItemService {
 
   @override
   Future<Either<String, String>> addItemToCart(
-      String name, double price, String imageUrl, String quantity) async {
+    String name,
+    double price,
+    String imageUrl,
+    String quantity, // Matches here
+    String category,
+  ) async {
     try {
-      await Hive.box('cart').add(CartItem(
-          name: name, price: price, imageUrl: imageUrl, quantity: quantity));
+      await Hive.box<CartItem>('cart').add(CartItem(
+        name: name,
+        price: price,
+        imageUrl: imageUrl,
+        category: category,
+      ));
 
-      print('item added');
+      print('Item added');
 
-      return const Right('Added Succesffully');
+      return const Right('Added Successfully');
     } catch (e) {
-      return Left('Error:$e');
+      return Left('Error: $e');
     }
   }
 }
