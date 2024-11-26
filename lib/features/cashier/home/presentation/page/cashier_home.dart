@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:post_case_study/core/util/responsive.dart';
-import 'package:post_case_study/features/cashier/home/domain/usecase/get_item_usecase.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/dashboard.dart';
 import 'package:post_case_study/features/cashier/home/presentation/widget/custom_drawer.dart';
-import 'package:post_case_study/locator.dart';
 
 class CashierHome extends StatelessWidget {
   const CashierHome({super.key});

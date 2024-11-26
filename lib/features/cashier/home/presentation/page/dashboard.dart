@@ -6,6 +6,7 @@ import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 import 'package:post_case_study/features/cashier/home/domain/usecase/get_item_usecase.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboard_bloc/dashboard_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboard_bloc/dashboard_state.dart';
+import 'package:post_case_study/features/cashier/home/presentation/widget/custom_card.dart';
 import 'package:post_case_study/locator.dart';
 
 class CashierDashboard extends StatelessWidget {
@@ -58,7 +59,7 @@ class CashierDashboard extends StatelessWidget {
                         ),
                       ),
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -104,20 +105,31 @@ class CashierDashboard extends StatelessWidget {
                               child: TabBarView(
                                 children: [
                                   // All Items
-                                  _buildGridView(state.items),
+                                  _buildGridView(context, state.items),
                                   // Computer Items
-                                  _buildGridView(state.items
-                                      .where(
-                                          (item) => item.category == 'Computer')
-                                      .toList()),
+                                  _buildGridView(
+                                    context,
+                                    state.items
+                                        .where((item) =>
+                                            item.category == 'Computer')
+                                        .toList(),
+                                  ),
                                   // Phone Items
-                                  _buildGridView(state.items
-                                      .where((item) => item.category == 'Phone')
-                                      .toList()),
+                                  _buildGridView(
+                                    context,
+                                    state.items
+                                        .where(
+                                            (item) => item.category == 'Phone')
+                                        .toList(),
+                                  ),
                                   // Food Items
-                                  _buildGridView(state.items
-                                      .where((item) => item.category == 'Food')
-                                      .toList()),
+                                  _buildGridView(
+                                    context,
+                                    state.items
+                                        .where(
+                                            (item) => item.category == 'Food')
+                                        .toList(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -143,77 +155,23 @@ class CashierDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildGridView(List<Item> items) {
+  Widget _buildGridView(BuildContext context, List<Item> items) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final crossAxisCount = screenWidth > 600 ? 4 : 3;
+    final childAspectRatio = screenWidth > 600 ? 2.5 : 2.2;
+
     return GridView.builder(
       padding: const EdgeInsets.all(8.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
-        childAspectRatio: 2,
+        childAspectRatio: childAspectRatio,
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        return Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Item Image
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(12),
-                ),
-                child: Image.network(
-                  item.imageUrl,
-                  height: 120,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Item Name
-                    Text(
-                      item.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    // Item Price
-                    Text(
-                      '\$${item.price.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    // Description or other details
-                    Text(
-                      item.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
+        return CustomerCard(item: item);
       },
     );
   }
