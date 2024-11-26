@@ -12,7 +12,9 @@ class CustomerCard extends StatelessWidget {
       child: Column(
         children: [
           ExtendedImage.network(
-              height: MediaQuery.sizeOf(context).height * 0.1, item.imageUrl),
+              cache: true,
+              height: MediaQuery.sizeOf(context).height * 0.1,
+              item.imageUrl),
         ],
       ),
     );

@@ -7,21 +7,21 @@
           "name": "Apple",
           "description": "Fresh and juicy red apples.",
           "price": 3.5,
-          "image_url": "https://via.placeholder.com/150?text=Apple"
+          "image_url": "https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w="
         },
         {
           "id": 2,
           "name": "Banana",
           "description": "Sweet and ripe bananas.",
           "price": 1.2,
-          "image_url": "https://via.placeholder.com/150?text=Banana"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6K7ukGLhKcvBY8CeyLiTfjKCX0i8lwM4zSg&s"
         },
         {
           "id": 3,
           "name": "Orange",
           "description": "Citrusy and vitamin-rich oranges.",
           "price": 2.5,
-          "image_url": "https://via.placeholder.com/150?text=Orange"
+          "image_url": "https://media.istockphoto.com/id/185284489/photo/orange.jpg?s=612x612&w=0&k=20&c=m4EXknC74i2aYWCbjxbzZ6EtRaJkdSJNtekh4m1PspE="
         }
       ]
     },
@@ -33,21 +33,21 @@
           "name": "Carrot",
           "description": "Fresh and crunchy carrots.",
           "price": 1.8,
-          "image_url": "https://via.placeholder.com/150?text=Carrot"
+          "image_url": "https://thumbs.dreamstime.com/b/carrot-isolated-white-background-109799060.jpg"
         },
         {
           "id": 5,
           "name": "Broccoli",
           "description": "Fresh green broccoli.",
           "price": 2.0,
-          "image_url": "https://via.placeholder.com/150?text=Broccoli"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7cb94CQfHOuTjiyvyX3Htog6piiizOp2Vzg&s"
         },
         {
           "id": 6,
           "name": "Potato",
           "description": "Farm-fresh potatoes.",
           "price": 0.9,
-          "image_url": "https://via.placeholder.com/150?text=Potato"
+          "image_url": "https://media.istockphoto.com/id/157430678/photo/three-potatoes.jpg?s=612x612&w=0&k=20&c=qkMoEgcj8ZvYbzDYEJEhbQ57v-nmkHS7e88q8dv7TSA="
         }
       ]
     },
@@ -59,21 +59,21 @@
           "name": "Milk",
           "description": "Full cream fresh milk.",
           "price": 1.5,
-          "image_url": "https://via.placeholder.com/150?text=Milk"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBLw8pHDmM2BH0OlzTNjOQL15dqcQO8n6Ypg&s"
         },
         {
           "id": 8,
           "name": "Cheese",
           "description": "Rich and creamy cheese.",
           "price": 4.0,
-          "image_url": "https://via.placeholder.com/150?text=Cheese"
+          "image_url": "https://t3.ftcdn.net/jpg/05/66/02/98/360_F_566029808_X7praimuCQt0MsLCmw5d65Pp5KqmTS8e.jpg"
         },
         {
           "id": 9,
           "name": "Butter",
           "description": "Smooth and salted butter.",
           "price": 2.5,
-          "image_url": "https://via.placeholder.com/150?text=Butter"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl8ZVcyhUFvVK1VRxrEhdKgWlRXCI3Rjgvaw&s"
         }
       ]
     },
@@ -85,21 +85,21 @@
           "name": "Chips",
           "description": "Crunchy potato chips.",
           "price": 1.8,
-          "image_url": "https://via.placeholder.com/150?text=Chips"
+          "image_url": "https://media.istockphoto.com/id/1383475280/photo/potato-chips-in-bowl-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=yy9vNbgkkipTiB1JdlXM1LELFKK-R3BSXCtuB9kNgis="
         },
         {
           "id": 11,
           "name": "Cookies",
           "description": "Delicious chocolate chip cookies.",
           "price": 2.5,
-          "image_url": "https://via.placeholder.com/150?text=Cookies"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2bplRLusR9j_dZdA1T8vo1WdKwDZToHnklQ&s"
         },
         {
           "id": 12,
           "name": "Popcorn",
           "description": "Buttery and salty popcorn.",
           "price": 1.2,
-          "image_url": "https://via.placeholder.com/150?text=Popcorn"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFpd6CaO3lsT0DLsZlPz8QNdsNRfv9kWFAbA&s"
         }
       ]
     },
@@ -111,21 +111,21 @@
           "name": "Coca Cola",
           "description": "Refreshing cola drink.",
           "price": 1.0,
-          "image_url": "https://via.placeholder.com/150?text=Coca+Cola"
+          "image_url": "https://www.austriajuice.com/hubfs/Beverage_compounds_drinks.jpg"
         },
         {
           "id": 14,
           "name": "Orange Juice",
           "description": "Pure and fresh orange juice.",
           "price": 3.0,
-          "image_url": "https://via.placeholder.com/150?text=Orange+Juice"
+          "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSayX_2LO37O_TH446RBHh_dDMQ7KqbvuFLWw&s"
         },
         {
           "id": 15,
           "name": "Water",
           "description": "Clean and pure drinking water.",
           "price": 0.5,
-          "image_url": "https://via.placeholder.com/150?text=Water"
+          "image_url": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2F0ZXJ8ZW58MHx8MHx8fDA%3D"
         }
       ]
     }
