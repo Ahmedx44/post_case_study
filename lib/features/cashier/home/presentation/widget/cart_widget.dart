@@ -64,12 +64,21 @@ class CartWidget extends StatelessWidget {
             ),
           ),
           // Checkout button
-          ElevatedButton(
-            onPressed: () {
-              // Navigate to the checkout page
-            },
-            child: const Text('Proceed to Checkout'),
-          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).colorScheme.primary),
+            child: Center(
+              child: Text(
+                'Checkout',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17),
+              ),
+            ),
+          )
         ],
       ),
     );

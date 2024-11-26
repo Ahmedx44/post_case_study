@@ -44,27 +44,32 @@ class CustomDrawer extends StatelessWidget {
           );
         }
 
-        return Drawer(
-          child: Column(
-            children: [
-              const DrawerHeader(
-                child: Text('Haron'),
-              ),
-              buildTile(
-                  title: 'Home', icon: HugeIcons.strokeRoundedHome02, index: 0),
-              buildTile(
-                  title: 'Orders',
-                  icon: HugeIcons.strokeRoundedInvoice,
-                  index: 1),
-              buildTile(
-                  title: 'Items',
-                  icon: HugeIcons.strokeRoundedGroupItems,
-                  index: 2),
-              buildTile(
-                  title: 'Setting',
-                  icon: HugeIcons.strokeRoundedSettings01,
-                  index: 3),
-            ],
+        return Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: Drawer(
+            child: Column(
+              children: [
+                const DrawerHeader(
+                  child: Text('Haron'),
+                ),
+                buildTile(
+                    title: 'Home',
+                    icon: HugeIcons.strokeRoundedHome02,
+                    index: 0),
+                buildTile(
+                    title: 'Orders',
+                    icon: HugeIcons.strokeRoundedInvoice,
+                    index: 1),
+                buildTile(
+                    title: 'Items',
+                    icon: HugeIcons.strokeRoundedGroupItems,
+                    index: 2),
+                buildTile(
+                    title: 'Setting',
+                    icon: HugeIcons.strokeRoundedSettings01,
+                    index: 3),
+              ],
+            ),
           ),
         );
       },

@@ -66,27 +66,21 @@ class CustomCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             // Add to Cart Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  print('Add to Cart for ${item.name}');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.primary),
+              child: Center(
                 child: Text(
                   'Add to Cart',
                   style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.secondary),
+                      fontSize: 17),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

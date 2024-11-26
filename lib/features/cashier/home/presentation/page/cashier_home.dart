@@ -30,6 +30,17 @@ class CashierHome extends StatelessWidget {
                     },
                   ),
                 ),
+                actions: [
+                  // Cart Icon (only on mobile screens)
+                  if (!isDesktop)
+                    IconButton(
+                      icon: const Icon(Icons.shopping_cart),
+                      onPressed: () {
+                        // Show the cart in a modal when the cart icon is pressed
+                        _showCartModal(context);
+                      },
+                    ),
+                ],
               ),
         body: BlocBuilder<CashierCubit, CashierState>(
           builder: (context, state) {
@@ -37,7 +48,7 @@ class CashierHome extends StatelessWidget {
             return Container(
               child: Row(
                 children: [
-                  // Sidebar  for Desktop
+                  // Sidebar for Desktop
                   if (isDesktop)
                     Container(
                       width: 250,
@@ -68,14 +79,25 @@ class CashierHome extends StatelessWidget {
                   // Right side Cart section (only for desktop)
                   if (isDesktop)
                     const CartWidget(
-                      cartItems: [],
-                    ), // Add the CartWidget here
+                      cartItems: [], // Add the cart items here
+                    ),
                 ],
               ),
             );
           },
         ),
       ),
+    );
+  }
+
+  // Method to show the cart in a modal bottom sheet
+  void _showCartModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return const CartWidget(cartItems: []); // Pass the cart items here
+      },
     );
   }
 }
