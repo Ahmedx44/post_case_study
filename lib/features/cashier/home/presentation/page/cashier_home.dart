@@ -5,6 +5,7 @@ import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/dashboard.dart';
 import 'package:post_case_study/features/cashier/home/presentation/widget/custom_drawer.dart';
+import 'package:post_case_study/features/cashier/home/presentation/widget/cart_widget.dart'; // Import the CartWidget
 
 class CashierHome extends StatelessWidget {
   const CashierHome({super.key});
@@ -63,6 +64,12 @@ class CashierHome extends StatelessWidget {
                       ],
                     ),
                   ),
+
+                  // Right side Cart section (only for desktop)
+                  if (isDesktop)
+                    const CartWidget(
+                      cartItems: [],
+                    ), // Add the CartWidget here
                 ],
               ),
             );

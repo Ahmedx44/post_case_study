@@ -58,9 +58,9 @@ class CustomCard extends StatelessWidget {
             // Item category
             Text(
               item.category,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSecondary),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -70,7 +70,6 @@ class CustomCard extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Define the button's action here
                   print('Add to Cart for ${item.name}');
                 },
                 style: ElevatedButton.styleFrom(

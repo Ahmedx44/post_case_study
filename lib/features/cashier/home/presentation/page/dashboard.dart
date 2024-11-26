@@ -113,11 +113,9 @@ class _CashierDashboardState extends State<CashierDashboard> {
                               ),
                               tabs: const [
                                 Tab(icon: Icon(Icons.all_inbox), text: "All"),
-                                Tab(
-                                    icon: Icon(Icons.computer),
-                                    text: "Computer"),
-                                Tab(icon: Icon(Icons.phone), text: "Phone"),
-                                Tab(icon: Icon(Icons.food_bank), text: "Food"),
+                                Tab(text: "Fruits"),
+                                Tab(text: "Vegetables"),
+                                Tab(text: "Dairy"),
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -131,16 +129,16 @@ class _CashierDashboardState extends State<CashierDashboard> {
                                   _buildGridView(
                                     context,
                                     filteredItems
-                                        .where((item) =>
-                                            item.category == 'Computer')
+                                        .where(
+                                            (item) => item.category == 'Fruits')
                                         .toList(),
                                   ),
                                   // Phone Items
                                   _buildGridView(
                                     context,
                                     filteredItems
-                                        .where(
-                                            (item) => item.category == 'Phone')
+                                        .where((item) =>
+                                            item.category == 'Vegetables')
                                         .toList(),
                                   ),
                                   // Food Items
@@ -148,7 +146,7 @@ class _CashierDashboardState extends State<CashierDashboard> {
                                     context,
                                     filteredItems
                                         .where(
-                                            (item) => item.category == 'Food')
+                                            (item) => item.category == 'Dairy')
                                         .toList(),
                                   ),
                                 ],
@@ -180,16 +178,16 @@ class _CashierDashboardState extends State<CashierDashboard> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final crossAxisCount = screenWidth > 600
-        ? 4 // More items per row on large screens
+        ? 4
         : screenWidth > 400
-            ? 3 // Medium screens
-            : 2; // Small screens
+            ? 3
+            : 2;
 
     final childAspectRatio = screenWidth > 600
         ? 1.0
         : screenWidth > 400
-            ? 0.9 // Compact for medium screens
-            : 0.8; // Tightest layout for small screens
+            ? 0.9
+            : 0.8;
 
     return GridView.builder(
       padding: const EdgeInsets.all(8.0),
