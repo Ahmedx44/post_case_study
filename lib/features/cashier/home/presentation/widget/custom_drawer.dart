@@ -58,10 +58,6 @@ class CustomDrawer extends StatelessWidget {
                     index: 0),
                 buildTile(
                     title: 'Orders',
-                    icon: HugeIcons.strokeRoundedInvoice,
-                    index: 1),
-                buildTile(
-                    title: 'Items',
                     icon: HugeIcons.strokeRoundedGroupItems,
                     index: 2),
                 buildTile(

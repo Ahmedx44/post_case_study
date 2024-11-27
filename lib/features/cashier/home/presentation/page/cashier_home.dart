@@ -31,12 +31,10 @@ class CashierHome extends StatelessWidget {
                   ),
                 ),
                 actions: [
-                  // Cart Icon (only on mobile screens)
                   if (!isDesktop)
                     IconButton(
                       icon: const Icon(Icons.shopping_cart),
                       onPressed: () {
-                        // Show the cart in a modal when the cart icon is pressed
                         _showCartModal(context);
                       },
                     ),
@@ -56,7 +54,6 @@ class CashierHome extends StatelessWidget {
                       child: const CustomDrawer(),
                     ),
 
-                  // Main content area
                   Expanded(
                     child: Column(
                       children: [
@@ -66,9 +63,8 @@ class CashierHome extends StatelessWidget {
                             onPageChanged: cubit.onItemTapped,
                             children: const [
                               CashierDashboard(),
-                              Center(child: Text('Search Page')),
-                              Center(child: Text('People Page')),
-                              Center(child: Text('Favorites Page')),
+                              Center(child: Text('Orders')),
+                              Center(child: Text('Setting')),
                             ],
                           ),
                         ),
@@ -76,7 +72,7 @@ class CashierHome extends StatelessWidget {
                     ),
                   ),
 
-                  if (isDesktop) CartWidget(),
+                  if (isDesktop) const CartWidget(),
                 ],
               ),
             );
@@ -92,7 +88,7 @@ class CashierHome extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return CartWidget(); // Pass the cart items here
+        return const CartWidget(); // Pass the cart items here
       },
     );
   }
