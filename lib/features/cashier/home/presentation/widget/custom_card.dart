@@ -8,7 +8,7 @@ import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_blo
 class CustomCard extends StatelessWidget {
   final Item item;
 
-  const CustomCard({Key? key, required this.item}) : super(key: key);
+  const CustomCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

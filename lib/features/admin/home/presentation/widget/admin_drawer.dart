@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_cubit.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_state.dart';
-import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 
 class AdminDrawer extends StatelessWidget {
   const AdminDrawer({super.key});

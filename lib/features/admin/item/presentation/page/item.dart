@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:go_router/go_router.dart';
+import 'package:post_case_study/features/admin/home/presentation/widget/admin_drawer.dart';
 import 'package:post_case_study/features/admin/item/data/model/item_model.dart';
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_cubit.dart';
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_state.dart';
@@ -14,39 +16,77 @@ class ItemPage extends StatelessWidget {
       create: (context) => ItemCubit()..getAllItem(),
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: BlocBuilder<ItemCubit, ItemState>(
-          builder: (context, state) {
-            if (state is ItemStateLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is ItemStateLoaded) {
-              return Padding(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () {
+                context.go('/add_item');
+              },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(10)),
+                width: MediaQuery.sizeOf(context).width * 0.15,
                 padding: const EdgeInsets.all(16.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: _getCrossAxisCount(context),
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemCount: state.item.length,
-                  itemBuilder: (context, index) {
-                    final item = state.item[index];
-                    return _buildItemCard(item);
-                  },
+                child: const Row(
+                  children: [
+                    Icon(Icons.add, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text(
+                      'Add New Item',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            } else if (state is ItemStateError) {
-              return Center(
-                child: Text(
-                  state.errorMessage,
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
-            }
-            return const Center(
-              child: Text('No items available'),
-            );
-          },
+              ),
+            ),
+            // Item list section
+            Expanded(
+              child: BlocBuilder<ItemCubit, ItemState>(
+                builder: (context, state) {
+                  if (state is ItemStateLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ItemStateLoaded) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: _getCrossAxisCount(context),
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: state.item.length,
+                        itemBuilder: (context, index) {
+                          final item = state.item[index];
+                          return _buildItemCard(item);
+                        },
+                      ),
+                    );
+                  } else if (state is ItemStateError) {
+                    return Center(
+                      child: Text(
+                        state.errorMessage,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: Text('No items available'),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

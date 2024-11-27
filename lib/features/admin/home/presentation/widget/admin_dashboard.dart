@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'invoice_table.dart'; // Import your InvoiceTable widget
 
 class AdminDashboard extends StatelessWidget {
   AdminDashboard({super.key});
@@ -16,7 +17,6 @@ class AdminDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Dashboard Header
-
             const Text(
               'Dashboard',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -49,8 +49,7 @@ class AdminDashboard extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Recent Activities or Charts
-
+            // Recent Activities and Performance Chart
             isDesktop
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,6 +66,16 @@ class AdminDashboard extends StatelessWidget {
                       _buildPerformanceChart(context),
                     ],
                   ),
+
+            const SizedBox(height: 20),
+
+            // Invoice Table Section
+            const Text(
+              'Invoices',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const InvoiceTable(), // Add the InvoiceTable widget here
           ],
         ),
       ),
@@ -74,7 +83,6 @@ class AdminDashboard extends StatelessWidget {
   }
 
   // Helper to create a stat card
-
   Widget _buildStatCard(BuildContext context,
       {required String title, required String value, required IconData icon}) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -113,7 +121,6 @@ class AdminDashboard extends StatelessWidget {
   }
 
   // Helper to create a recent activities section
-
   Widget _buildRecentActivities(BuildContext context) {
     return Card(
       elevation: 2,
@@ -152,8 +159,7 @@ class AdminDashboard extends StatelessWidget {
     );
   }
 
-  // // Helper to create a performance chart section
-
+  // Helper to create a performance chart section
   Widget _buildPerformanceChart(BuildContext context) {
     return Card(
       elevation: 2,
@@ -167,11 +173,8 @@ class AdminDashboard extends StatelessWidget {
               'Performance Chart',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 10),
-
             // Placeholder for a chart (use a charting library like FLChart or Syncfusion)
-
             Container(
               height: 150,
               width: double.infinity,
@@ -187,7 +190,6 @@ class AdminDashboard extends StatelessWidget {
   }
 
   // Mock data for stats
-
   final List<Map<String, dynamic>> _statData = [
     {'title': 'Total Users', 'value': '1,245', 'icon': Icons.person_outline},
     {
