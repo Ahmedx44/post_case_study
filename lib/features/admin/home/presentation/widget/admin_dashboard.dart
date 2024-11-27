@@ -6,14 +6,11 @@ class AdminDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Dashboard'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Row for statistics
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -27,12 +24,10 @@ class AdminDashboard extends StatelessWidget {
                     '\$50,000', Colors.red),
               ],
             ),
-            const SizedBox(height: 20), // Space between stats and main content
-            // Add more content here if needed
-            Expanded(
+            const SizedBox(height: 20),
+            const Expanded(
               child: Center(
-                child:
-                    Text('Main Content Here'), // Placeholder for main content
+                child: Text('Main Content Here'),
               ),
             ),
           ],

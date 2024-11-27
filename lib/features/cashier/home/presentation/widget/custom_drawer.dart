@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
+import 'package:post_case_study/main.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -59,11 +61,31 @@ class CustomDrawer extends StatelessWidget {
                 buildTile(
                     title: 'Orders',
                     icon: HugeIcons.strokeRoundedGroupItems,
-                    index: 2),
+                    index: 1),
                 buildTile(
                     title: 'Setting',
                     icon: HugeIcons.strokeRoundedSettings01,
-                    index: 3),
+                    index: 2),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListTile(
+                    title: const Text(
+                      'Logout',
+                      style: TextStyle(),
+                    ),
+                    leading: const Icon(
+                      HugeIcons.strokeRoundedLogout01,
+                    ),
+                    onTap: () {
+                      context.go('/');
+                    },
+                  ),
+                )
               ],
             ),
           ),

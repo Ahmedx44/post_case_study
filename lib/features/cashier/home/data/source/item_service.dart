@@ -12,7 +12,7 @@ abstract class ItemService {
     String name,
     double price,
     String imageUrl,
-    String quantity, // Matches here
+    String quantity,
     String category,
   );
 }
