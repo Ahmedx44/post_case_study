@@ -78,6 +78,7 @@ class ItemPage extends StatelessWidget {
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(12)),
               child: ExtendedImage.network(
+                height: 100,
                 item.imageUrl,
                 fit: BoxFit.fill,
                 cache: true,

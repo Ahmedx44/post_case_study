@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
-import 'package:post_case_study/main.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
