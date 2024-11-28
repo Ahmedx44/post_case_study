@@ -1,65 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
+import 'package:post_case_study/features/admin/home/presentation/bloc/admin_cubit.dart';
+import 'package:post_case_study/features/admin/home/presentation/bloc/admin_state.dart';
 
-class AdminDashboard extends StatefulWidget {
+class AdminDashboard extends StatelessWidget {
   const AdminDashboard({super.key});
 
   @override
-  State<AdminDashboard> createState() => _AdminDashboardState();
-}
-
-class _AdminDashboardState extends State<AdminDashboard> {
-  int totalrevenue = 0;
-  int total_transaction = 0;
-  int total_item = 0;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _getValues();
-  }
-
-  Future<void> _getValues() async {
-    final invoice = Hive.box<Invoice>('invoices');
-
-    setState(() {
-      total_transaction = invoice.values.length;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Dashboard',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+    return BlocProvider(
+      create: (context) => AdminCubit()..getValues(),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+          child: BlocBuilder<AdminCubit, AdminState>(
+            builder: (context, state) {
+              final adminCubit = context.read<AdminCubit>();
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Dashboard',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _statsCard(context, 'Total Revenue', totalrevenue.toString(),
-                    HugeIcons.strokeRoundedMoney03),
-                _statsCard(
-                    context,
-                    'Transactions',
-                    total_transaction.toString(),
-                    HugeIcons.strokeRoundedMoney03),
-                _statsCard(context, 'Total Items', total_item.toString(),
-                    HugeIcons.strokeRoundedMoney03),
-              ],
-            ),
-          ],
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _statsCard(
+                          context,
+                          'Total Revenue',
+                          '${adminCubit.totalrevenue.toString()}\$',
+                          HugeIcons.strokeRoundedMoney03),
+                      _statsCard(
+                          context,
+                          'Transactions',
+                          adminCubit.total_transaction.toString(),
+                          HugeIcons.strokeRoundedMoney03),
+                      _statsCard(
+                          context,
+                          'Total Items',
+                          adminCubit.total_item.toString(),
+                          HugeIcons.strokeRoundedMoney03),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
