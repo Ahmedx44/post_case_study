@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_cubit.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_state.dart';
+import 'package:post_case_study/features/admin/home/presentation/widget/invoice_table.dart';
 
 class AdminDashboard extends StatelessWidget {
   const AdminDashboard({super.key});
@@ -19,7 +20,7 @@ class AdminDashboard extends StatelessWidget {
             builder: (context, state) {
               final adminCubit = context.read<AdminCubit>();
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Dashboard',
@@ -48,6 +49,10 @@ class AdminDashboard extends StatelessWidget {
                           HugeIcons.strokeRoundedMoney03),
                     ],
                   ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const InvoiceTable()
                 ],
               );
             },

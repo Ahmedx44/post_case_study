@@ -29,17 +29,41 @@ class InvoiceTable extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height *
-                      0.5, // Adjust as needed
+                  minHeight: MediaQuery.of(context).size.height * 0.5,
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: DataTable(
+                    columnSpacing: 20,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     columns: const [
-                      DataColumn(label: Text('Item')),
-                      DataColumn(label: Text('Price')),
-                      DataColumn(label: Text('Date')),
-                      DataColumn(label: Text('Total')),
+                      DataColumn(
+                        label: Text(
+                          'Item',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Price',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Date',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Total',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                     rows: invoices.map<DataRow>((invoice) {
                       final items =
@@ -47,13 +71,20 @@ class InvoiceTable extends StatelessWidget {
                       final total = invoice.totalPrice;
                       final date = invoice.createdAt;
 
-                      return DataRow(cells: [
-                        DataCell(Text(items)),
-                        DataCell(Text('\$${total.toStringAsFixed(2)}')),
-                        DataCell(
-                            Text('${date.year}-${date.month}-${date.day}')),
-                        DataCell(Text('\$${total.toStringAsFixed(2)}')),
-                      ]);
+                      return DataRow(
+                        color: (invoices.indexOf(invoice) % 2 == 0)
+                            ? MaterialStateProperty.all(const Color.fromARGB(
+                                255, 187, 222, 248)) // Correct usage
+
+                            : MaterialStateProperty.all(Colors.grey.shade500),
+                        cells: [
+                          DataCell(Text(items)),
+                          DataCell(Text('\$${total.toStringAsFixed(2)}')),
+                          DataCell(
+                              Text('${date.year}-${date.month}-${date.day}')),
+                          DataCell(Text('\$${total.toStringAsFixed(2)}')),
+                        ],
+                      );
                     }).toList(),
                   ),
                 ),

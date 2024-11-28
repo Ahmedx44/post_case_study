@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:extended_image/extended_image.dart';
+
 import 'package:go_router/go_router.dart';
+
 import 'package:post_case_study/features/admin/item/data/model/item_model.dart';
+
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_cubit.dart';
+
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_state.dart';
+import 'package:post_case_study/features/admin/item/presentation/widget/add_item.dart';
 
 class ItemPage extends StatelessWidget {
   const ItemPage({super.key});
@@ -21,9 +28,10 @@ class ItemPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+
             GestureDetector(
               onTap: () {
-                context.go('/add_item');
+                _showAddItemModal(context); // Show modal instead of navigating
               },
               child: Container(
                 margin: const EdgeInsets.all(10),
@@ -47,7 +55,9 @@ class ItemPage extends StatelessWidget {
                 ),
               ),
             ),
+
             // Item list section
+
             Expanded(
               child: BlocBuilder<ItemCubit, ItemState>(
                 builder: (context, state) {
@@ -66,6 +76,7 @@ class ItemPage extends StatelessWidget {
                         itemCount: state.item.length,
                         itemBuilder: (context, index) {
                           final item = state.item[index];
+
                           return _buildItemCard(item, context);
                         },
                       ),
@@ -78,6 +89,7 @@ class ItemPage extends StatelessWidget {
                       ),
                     );
                   }
+
                   return const Center(
                     child: Text('No items available'),
                   );
@@ -87,6 +99,15 @@ class ItemPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showAddItemModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AddItemModal();
+      },
     );
   }
 
@@ -127,12 +148,15 @@ class ItemPage extends StatelessWidget {
                         child: const Icon(Icons.error, color: Colors.red),
                       );
                     }
+
                     return null;
                   },
                 ),
               ),
             ),
+
             // Item Details
+
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
