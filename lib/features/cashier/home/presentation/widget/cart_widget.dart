@@ -1,19 +1,24 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
-import 'package:printing/printing.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({super.key});
 
-  final double taxRate = 0.15; // 15% tax
-  final double discount = 5.0; // Flat $5 discount
-
   @override
   Widget build(BuildContext context) {
+    final cartCubit = CartCubit(); // Create the CartCubit instance here.
+    return BlocProvider(
+      create: (_) => cartCubit,
+      child: _buildCart(context, cartCubit),
+    );
+  }
+
+  Widget _buildCart(BuildContext context, CartCubit cartCubit) {
     Box<CartItem> cartBox = Hive.box<CartItem>('cart');
 
     return Container(
@@ -100,9 +105,9 @@ class CartWidget extends StatelessWidget {
             valueListenable: cartBox.listenable(),
             builder: (context, box, _) {
               List<CartItem> cartItems = box.values.toList();
-              double subTotal = _calculateSubTotal(cartItems);
-              double tax = subTotal * taxRate;
-              double total = subTotal + tax - discount;
+              double subTotal = cartCubit.calculateSubTotal(cartItems);
+              double tax = subTotal * cartCubit.taxRate;
+              double total = subTotal + tax; // Updated calculation
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +128,7 @@ class CartWidget extends StatelessWidget {
           const SizedBox(height: 16),
           GestureDetector(
             onTap: () {
-              _handleCheckout(cartBox);
+              cartCubit.handleCheckout(cartBox);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -170,86 +175,5 @@ class CartWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  double _calculateSubTotal(List<CartItem> items) {
-    double subTotal = 0;
-    for (var item in items) {
-      subTotal += item.price;
-    }
-    return subTotal;
-  }
-
-  void _handleCheckout(Box<CartItem> cartBox) async {
-    try {
-      // Generate the PDF
-      final pdf = pw.Document();
-
-      // Get cart items
-      List<CartItem> cartItems = cartBox.values.toList();
-
-      // Calculate total price
-      double subTotal = _calculateSubTotal(cartItems);
-      double tax = subTotal * taxRate;
-      double total = subTotal + tax - discount;
-
-      // Build the PDF content
-      pdf.addPage(
-        pw.Page(
-          build: (context) => pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text(
-                'Invoice',
-                style: pw.TextStyle(
-                  fontSize: 24,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.SizedBox(height: 20),
-              pw.Table.fromTextArray(
-                headers: ['Item', 'Price'],
-                data: cartItems
-                    .map((item) =>
-                        [item.name, '\$${item.price.toStringAsFixed(2)}'])
-                    .toList(),
-              ),
-              pw.Divider(),
-              pw.Text(
-                'Total: \$${total.toStringAsFixed(2)}',
-                style: pw.TextStyle(
-                  fontSize: 18,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.Text(
-                'Thank you for your purchase!',
-                style:
-                    pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-      );
-
-      // Save and print the PDF
-      await Printing.layoutPdf(onLayout: (format) async => pdf.save());
-
-      // Save the invoice in the Hive `invoices` box
-      final invoiceBox = Hive.box<Invoice>('invoices');
-      final invoice = Invoice(
-        totalPrice: total,
-        totalItems: cartItems.length,
-        items: cartItems,
-        createdAt: DateTime.now(),
-      );
-      await invoiceBox.add(invoice);
-
-      // Clear the cart
-      cartBox.clear();
-      debugPrint('Checkout completed and cart cleared! Invoice saved.');
-    } catch (e) {
-      debugPrint('Error during checkout: $e');
-    }
   }
 }

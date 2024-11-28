@@ -17,13 +17,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
-  // Register adapters
+  // Adapters
   Hive.registerAdapter(CartItemAdapter());
   Hive.registerAdapter(InvoiceAdapter());
-  Hive.registerAdapter(
-      ItemAdapter()); // Use the adapter from your main Item class
+  Hive.registerAdapter(ItemAdapter());
 
-  // Open necessary Hive boxes
+  //Hive Boxs
   await Hive.openBox<CartItem>('cart');
   await Hive.openBox<Invoice>('invoices');
   await Hive.openBox<Item>('items');

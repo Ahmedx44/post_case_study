@@ -63,8 +63,6 @@ class CashierHome extends StatelessWidget {
                             onPageChanged: cubit.onItemTapped,
                             children: const [
                               CashierDashboard(),
-                              Center(child: Text('Orders')),
-                              Center(child: Text('Setting')),
                             ],
                           ),
                         ),
