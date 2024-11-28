@@ -1,4 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:post_case_study/features/admin/home/data/repository/invoice_repository_impl.dart';
+import 'package:post_case_study/features/admin/home/data/source/invoice_service.dart';
+import 'package:post_case_study/features/admin/home/domain/repository/invoice_repository.dart';
+import 'package:post_case_study/features/admin/home/domain/usecase/get_invoice_usecase.dart';
 import 'package:post_case_study/features/admin/item/data/repository/item_repository_impl.dart';
 import 'package:post_case_study/features/admin/item/data/source/item_source.dart';
 import 'package:post_case_study/features/admin/item/domain/repository/item_repository.dart';
@@ -15,14 +19,18 @@ void setupLocator() {
   //Services
   locator.registerLazySingleton<ItemService>(() => ItemServiceImpl());
   locator.registerLazySingleton<AdminItemService>(() => AdminItemServiceImpl());
+  locator.registerLazySingleton<InvoiceService>(() => InvoiceServiceImpl());
 
   //Reposiotrys
   locator.registerLazySingleton<ItemReposiotry>(() => ItemRepositoryImpl());
   locator.registerLazySingleton<ItemRepository>(() => AdminItemRepository());
+  locator
+      .registerLazySingleton<InvoiceRepository>(() => InvoiceRepositoryImpl());
 
   //Usecase
   locator.registerLazySingleton<GetItemUsecase>(() => GetItemUsecase());
   locator.registerLazySingleton<AddToCartUseCase>(() => AddToCartUseCase());
   locator
       .registerLazySingleton<GetAdminItemUseCase>(() => GetAdminItemUseCase());
+  locator.registerLazySingleton<GetInvoiceUsecase>(() => GetInvoiceUsecase());
 }

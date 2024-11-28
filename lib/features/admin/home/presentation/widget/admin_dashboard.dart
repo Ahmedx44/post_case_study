@@ -75,7 +75,7 @@ class AdminDashboard extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const InvoiceTable(), // Add the InvoiceTable widget here
+            const InvoiceTable(),
           ],
         ),
       ),
@@ -174,7 +174,6 @@ class AdminDashboard extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            // Placeholder for a chart (use a charting library like FLChart or Syncfusion)
             Container(
               height: 150,
               width: double.infinity,

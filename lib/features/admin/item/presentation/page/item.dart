@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:go_router/go_router.dart';
-import 'package:post_case_study/features/admin/home/presentation/widget/admin_drawer.dart';
 import 'package:post_case_study/features/admin/item/data/model/item_model.dart';
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_cubit.dart';
 import 'package:post_case_study/features/admin/item/presentation/bloc/item_state.dart';
@@ -19,7 +18,7 @@ class ItemPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             GestureDetector(
@@ -27,7 +26,7 @@ class ItemPage extends StatelessWidget {
                 context.go('/add_item');
               },
               child: Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(10)),
@@ -93,7 +92,6 @@ class ItemPage extends StatelessWidget {
   }
 
   int _getCrossAxisCount(BuildContext context) {
-    // Adjust the number of columns based on screen width
     if (MediaQuery.of(context).size.width < 600) {
       return 2; // Mobile
     } else if (MediaQuery.of(context).size.width < 1200) {
