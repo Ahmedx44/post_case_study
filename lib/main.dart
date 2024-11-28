@@ -1,20 +1,29 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:post_case_study/core/bloc/theme_bloc/theme_cubit.dart';
 import 'package:post_case_study/core/theme/theme.dart';
 import 'package:post_case_study/features/admin/home/presentation/page/admin_home.dart';
 import 'package:post_case_study/features/admin/item/presentation/page/add_item.dart';
-import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
-import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
-import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/cashier_home.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/page/login_screen.dart';
 import 'package:post_case_study/locator.dart';
-import 'package:post_case_study/model/item.dart';
 import 'package:post_case_study/preloadItem.dart';
+import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
+import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
+import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
+  );
   await Hive.initFlutter();
 
   // Adapters
@@ -22,13 +31,14 @@ void main() async {
   Hive.registerAdapter(InvoiceAdapter());
   Hive.registerAdapter(ItemAdapter());
 
-  //Hive Boxs
+  // Hive Boxes
   await Hive.openBox<CartItem>('cart');
   await Hive.openBox<Invoice>('invoices');
   await Hive.openBox<Item>('items');
 
   setupLocator();
   await preloadItems();
+
   runApp(const MyApp());
 }
 
@@ -68,11 +78,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      theme: lightMode,
-      darkTheme: darkMode,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (_) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, theme) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: _router,
+            themeMode: theme,
+            theme: lightMode,
+            darkTheme: darkMode,
+          );
+        },
+      ),
     );
   }
 }
