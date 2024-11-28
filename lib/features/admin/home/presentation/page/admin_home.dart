@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:post_case_study/core/util/responsive.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_cubit.dart';
 import 'package:post_case_study/features/admin/home/presentation/bloc/admin_state.dart';
-import 'package:post_case_study/features/admin/home/presentation/widget/admin_dashboard.dart';
+import 'package:post_case_study/features/admin/home/presentation/page/admin_dashboard.dart';
 import 'package:post_case_study/features/admin/home/presentation/widget/admin_drawer.dart';
 import 'package:post_case_study/features/admin/item/presentation/page/item.dart';
 
