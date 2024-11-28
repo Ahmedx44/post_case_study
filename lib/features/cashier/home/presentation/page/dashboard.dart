@@ -2,7 +2,6 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:post_case_study/features/cashier/home/data/model/item.dart';
 import 'package:post_case_study/features/cashier/home/domain/usecase/get_item_usecase.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/dashboard_bloc/dashboard_cubit.dart';
@@ -33,7 +32,7 @@ class _CashierDashboardState extends State<CashierDashboard> {
               child: CircularProgressIndicator(),
             );
           } else if (state is DashboardStateLoaded) {
-            // Filter items based on search query
+            // Filter items based on  query
             final filteredItems = state.items
                 .where((item) => item.name
                     .toLowerCase()

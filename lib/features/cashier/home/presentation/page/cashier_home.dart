@@ -50,7 +50,7 @@ class CashierHome extends StatelessWidget {
                   if (isDesktop)
                     Container(
                       width: 250,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.surface,
                       child: const CustomDrawer(),
                     ),
 

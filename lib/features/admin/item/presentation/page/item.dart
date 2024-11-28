@@ -14,7 +14,7 @@ class ItemPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ItemCubit()..getAllItem(),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,9 +28,9 @@ class ItemPage extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(10)),
-                width: MediaQuery.sizeOf(context).width * 0.15,
+                width: 200,
                 padding: const EdgeInsets.all(16.0),
                 child: const Row(
                   children: [
@@ -40,7 +40,6 @@ class ItemPage extends StatelessWidget {
                       'Add New Item',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -62,12 +61,12 @@ class ItemPage extends StatelessWidget {
                           crossAxisCount: _getCrossAxisCount(context),
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
-                          childAspectRatio: 0.75,
+                          childAspectRatio: 1,
                         ),
                         itemCount: state.item.length,
                         itemBuilder: (context, index) {
                           final item = state.item[index];
-                          return _buildItemCard(item);
+                          return _buildItemCard(item, context);
                         },
                       ),
                     );
@@ -101,65 +100,69 @@ class ItemPage extends StatelessWidget {
     }
   }
 
-  Widget _buildItemCard(ItemModel item) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Image Widget
-          Expanded(
-            child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(12)),
-              child: ExtendedImage.network(
-                height: 100,
-                item.imageUrl,
-                fit: BoxFit.fill,
-                cache: true,
-                loadStateChanged: (state) {
-                  if (state.extendedImageLoadState == LoadState.failed) {
-                    return Container(
-                      color: Colors.grey.shade200,
-                      child: const Icon(Icons.error, color: Colors.red),
-                    );
-                  }
-                  return null;
-                },
+  Widget _buildItemCard(ItemModel item, BuildContext context) {
+    return Container(
+      width: 100,
+      child: Card(
+        color: Theme.of(context).colorScheme.secondary,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(12)),
+                child: ExtendedImage.network(
+                  item.imageUrl,
+                  fit: BoxFit.fill,
+                  cache: true,
+                  loadStateChanged: (state) {
+                    if (state.extendedImageLoadState == LoadState.failed) {
+                      return Container(
+                        color: Colors.grey.shade200,
+                        child: const Icon(Icons.error, color: Colors.red),
+                      );
+                    }
+                    return null;
+                  },
+                ),
               ),
             ),
-          ),
-          // Item Details
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.category,
-                  style: const TextStyle(color: Colors.grey),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '\$${item.price.toStringAsFixed(2)}',
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ],
+            // Item Details
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.name,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    item.category,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '\$${item.price.toStringAsFixed(2)}',
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

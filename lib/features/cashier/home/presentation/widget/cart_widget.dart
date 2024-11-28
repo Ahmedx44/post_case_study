@@ -2,7 +2,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
 
@@ -11,7 +10,7 @@ class CartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = CartCubit(); // Create the CartCubit instance here.
+    final cartCubit = CartCubit();
     return BlocProvider(
       create: (_) => cartCubit,
       child: _buildCart(context, cartCubit),
