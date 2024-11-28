@@ -6,7 +6,7 @@ import 'package:post_case_study/locator.dart';
 
 class ItemRepositoryImpl extends ItemReposiotry {
   @override
-  Future<Either<String, List<Item>>> getAllItems() async {
+  Future<Either<String, List>> getAllItems() async {
     return await locator<ItemService>().getAllItems();
   }
 

@@ -52,10 +52,10 @@ class AdminHome extends StatelessWidget {
                         child: PageView(
                           controller: cubit.pageController,
                           onPageChanged: cubit.onItemTapped,
-                          children: [
+                          children: const [
                             AdminDashboard(),
-                            const ItemPage(),
-                            const Center(child: Text('People Page')),
+                            ItemPage(),
+                            Center(child: Text('People Page')),
                           ],
                         ),
                       ),

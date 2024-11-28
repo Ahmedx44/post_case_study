@@ -175,7 +175,7 @@ class _CashierDashboardState extends State<CashierDashboard> {
     );
   }
 
-  Widget _buildGridView(BuildContext context, List<Item> items) {
+  Widget _buildGridView(BuildContext context, List items) {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final crossAxisCount = screenWidth > 600

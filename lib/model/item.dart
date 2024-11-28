@@ -2,29 +2,29 @@ import 'package:hive/hive.dart';
 
 part 'item.g.dart';
 
-@HiveType(typeId: 5)
-class Item extends HiveObject {
+@HiveType(typeId: 10)
+class ItemHive {
   @HiveField(0)
-  late String name;
+  final String name;
 
   @HiveField(1)
-  late double price;
+  final double price;
 
   @HiveField(2)
-  late String imageUrl;
+  final String imageUrl;
 
   @HiveField(3)
-  late String category;
+  final String category;
 
-  Item({
+  ItemHive({
     required this.name,
     required this.price,
     required this.imageUrl,
     required this.category,
   });
 
-  factory Item.fromJson(Map<String, dynamic> json, String category) {
-    return Item(
+  factory ItemHive.fromJson(Map<String, dynamic> json, String category) {
+    return ItemHive(
       name: json['name'],
       price: (json['price'] as num).toDouble(),
       imageUrl: json['imageUrl'],

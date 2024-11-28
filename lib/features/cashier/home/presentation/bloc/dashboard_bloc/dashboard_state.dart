@@ -7,7 +7,7 @@ class DashboardStateInitial extends DashboardState {}
 class DashboardStateLoading extends DashboardState {}
 
 class DashboardStateLoaded extends DashboardState {
-  final List<Item> items;
+  final List items;
 
   DashboardStateLoaded({required this.items});
 }

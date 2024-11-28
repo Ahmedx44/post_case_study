@@ -4,7 +4,7 @@ import 'package:post_case_study/features/cashier/home/domain/reposiotry/item_rep
 import 'package:post_case_study/locator.dart';
 
 class GetItemUsecase {
-  Future<Either<String, List<Item>>> call() async {
+  Future<Either<String, List>> call() async {
     return await locator<ItemReposiotry>().getAllItems();
   }
 }
