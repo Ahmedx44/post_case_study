@@ -26,29 +26,36 @@ class InvoiceTable extends StatelessWidget {
             }
 
             return SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: const [
-                    DataColumn(label: Text('Item')),
-                    DataColumn(label: Text('Price')),
-                    DataColumn(label: Text('Date')),
-                    DataColumn(label: Text('Total')),
-                  ],
-                  rows: invoices.map((invoice) {
-                    final items =
-                        invoice.items.map((item) => item.name).join(', ');
-                    final total = invoice.totalPrice;
-                    final date = invoice.createdAt;
+              scrollDirection: Axis.horizontal,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height *
+                      0.5, // Adjust as needed
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: DataTable(
+                    columns: const [
+                      DataColumn(label: Text('Item')),
+                      DataColumn(label: Text('Price')),
+                      DataColumn(label: Text('Date')),
+                      DataColumn(label: Text('Total')),
+                    ],
+                    rows: invoices.map<DataRow>((invoice) {
+                      final items =
+                          invoice.items.map((item) => item.name).join(', ');
+                      final total = invoice.totalPrice;
+                      final date = invoice.createdAt;
 
-                    return DataRow(cells: [
-                      DataCell(Text(items)),
-                      DataCell(Text('\$${total.toStringAsFixed(2)}')),
-                      DataCell(Text('${date.year}-${date.month}-${date.day}')),
-                      DataCell(Text('\$${total.toStringAsFixed(2)}')),
-                    ]);
-                  }).toList(),
+                      return DataRow(cells: [
+                        DataCell(Text(items)),
+                        DataCell(Text('\$${total.toStringAsFixed(2)}')),
+                        DataCell(
+                            Text('${date.year}-${date.month}-${date.day}')),
+                        DataCell(Text('\$${total.toStringAsFixed(2)}')),
+                      ]);
+                    }).toList(),
+                  ),
                 ),
               ),
             );
