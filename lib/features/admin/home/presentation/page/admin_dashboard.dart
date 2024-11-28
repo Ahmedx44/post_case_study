@@ -25,7 +25,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     final invoice = Hive.box<Invoice>('invoices');
 
     setState(() {
-      totalrevenue = invoice.values.length;
+      total_transaction = invoice.values.length;
     });
   }
 
