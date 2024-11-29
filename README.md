@@ -44,10 +44,10 @@ This will allow the application to function without generating PDF receipts on A
 ---
 
 ## Technologies Used  
-- **Flutter/Dart**: Cross-platform framework for mobile and desktop development.  
-- **Hive**: Lightweight local database for storing data.  
-- **HydratedBloc**: State management with persistent theme support.  
-- **Clean Architecture**: Ensures a modular, maintainable, and scalable codebase.  
+**Flutter/Dart**: I used Flutter for building the cross-platform mobile and desktop application, with Dart as the programming language.
+**Hive**: I implemented Hive as the local database to store items, ensuring data persistence even when offline.
+**HydratedBloc**: I used HydratedBloc to manage the theme state and make sure it persists across app sessions for a seamless experience.
+**Clean Architecture**: The app follows Clean Architecture principles to keep the codebase modular, maintainable, and scalable.
 
 ---
 
