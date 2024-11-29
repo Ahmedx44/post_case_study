@@ -1,16 +1,36 @@
-# post_case_study
 
-A new Flutter project.
 
-## Getting Started
+POS System For Companh A
 
-This project is a starting point for a Flutter application.
+Overview
 
-A few resources to get you started if this is your first Flutter project:
+This Point of Sale (POS) System is a local, offline solution built with Flutter. It is designed for small businesses, enabling efficient sales transactions without reliance on remote servers or internet connectivity. The system supports two roles: Admin and Cashier, offering basic yet powerful functionalities for managing products and processing customer transactions.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Admin
+
+Add new products to the system.
+
+
+Cashier
+
+Handle customer purchases by selecting items and specifying quantities.
+
+Process customer payments and generate receipts.
+
+
+Core Functionalities
+
+
+Product Management: Admins can add products with details like name, price, and quantity.
+
+Sales Transactions: Cashiers can manage transactions, calculate totals, and generate receipts.
+
+Local Storage: All data, including p
+Contributing
+
+If you would like to contribute to this project, feel free to submit a pull request or open an issue for discussion.
+
+
+
