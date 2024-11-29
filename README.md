@@ -106,4 +106,16 @@ Log in as admin to add products to the system.
 Log in to handle customer purchases and process payments.
 
 
+Username and Passwords
+
+Admin
+
+username = Admin
+password = password
+
+Cashier
+
+username = cashier
+password = password
+
 
