@@ -45,7 +45,7 @@ This will allow the application to function without generating PDF receipts on A
 
 ## Technologies Used  
 - **Flutter/Dart**: I used Flutter for building the cross-platform mobile and desktop application, with Dart as the programming language.
-- **Hive**: I implemented Hive as the local database to store items, ensuring data persistence even when offline.
+- **Hive**: I implemented Hive as the local database to store items and other data entirely offline, so the app can function without an internet connection..
 - **HydratedBloc**: I used HydratedBloc to manage the theme state and make sure it persists across app sessions for a seamless experience.
 - **Clean Architecture**: The app follows Clean Architecture principles to keep the codebase modular, maintainable, and scalable.
 
