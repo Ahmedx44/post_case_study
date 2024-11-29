@@ -74,7 +74,7 @@ Steps
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/pos-system.git
+git clone https://github.com/Ahmedx44/post_case_study
 
 
 2. Navigate to the project directory:
