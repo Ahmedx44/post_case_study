@@ -1,121 +1,108 @@
-POS System for Company A
 
-Overview
+# POS System for Company A  
 
-This Point of Sale (POS) System is a local, offline solution built with Flutter. It, enable efficient sales transactions without reliance in remote servers or internet connectivity. The system supports two roles: Admin and Cashier, offering basic yet powerful functionalities for managing products and processing customer transactions.
+## Overview  
 
-Features
+This Point of Sale (POS) System is a local, offline solution built with Flutter. It enables efficient sales transactions without
+reliance on remote servers orinternet connectivity. The system supports two roles: Admin and Cashier, offering basic yet powerful 
+functionalities for managing products and processing customer transactions.  
 
-Admin
+---
 
-Add new products to the system.
+## Features  
 
+### Admin  
+- Add new products to the system.  
 
-Cashier
+### Cashier  
+- Handle customer purchases by selecting items and specifying quantities.  
+- Process customer payments and generate receipts.  
 
-Handle customer purchases by selecting items and specifying quantities.
+---
 
-Process customer payments and generate receipts.
+## Core Functionalities  
+- **Product Management**: Admins can add products with details like name, price, and quantity.  
+- **Sales Transactions**: Cashiers can manage transactions, calculate totals, and generate receipts.  
+- **Local Storage**: All data, including product information and user authentication, is stored locally.  
 
+---
 
-Core Functionalities
+## Known Issues  
 
-Product Management: Admins can add products with details like name, price, and quantity.
+### Android Compatibility  
+- There is a compilation issue on Android caused by the PDF and printing packages.  
+- The system works fine on desktop platforms.  
 
-Sales Transactions: Cashiers can manage transactions, calculate totals, and generate receipts.
+### Workaround for Android  
+To make the application work on Android:  
+1. Comment out the PDF and printing packages in `pubspec.yaml`.  
+2. In the `CartCubit`, comment out the `handleCheckout` function.  
+3. Rebuild the project.  
 
-Local Storage: All data, including product information and user authentication, is stored locally.
+This will allow the application to function without generating PDF receipts on Android devices.  
 
+---
 
-Known Issues
+## Technologies Used  
+- **Flutter/Dart**: Cross-platform framework for mobile and desktop development.  
+- **Hive**: Lightweight local database for storing data.  
+- **HydratedBloc**: State management with persistent theme support.  
+- **Clean Architecture**: Ensures a modular, maintainable, and scalable codebase.  
 
-Android Compatibility
+---
 
-There is a compilation issue on Android caused by the PDF and printing packages.
+## Installation  
 
-However, the system works fine on desktop platforms.
+### Prerequisites  
+- Flutter SDK installed ([Get Started with Flutter](https://flutter.dev/docs/get-started)).  
 
+### Steps  
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/Ahmedx44/post_case_study  
+   ```  
 
-Workaround for Android
+2. Navigate to the project directory:  
+   ```bash  
+   cd pos-system  
+   ```  
 
-To make the application work on Android:
+3. Install dependencies:  
+   ```bash  
+   flutter pub get  
+   ```  
 
-1. Comment out the PDF and printing packages in pubspec.yaml.
+4. Run the app:  
+   ```bash  
+   flutter run  
+   ```  
 
+---
 
-2. In the CartCubit, comment out the handleCheckout function.
+## Usage  
 
+### 1. Admin Login  
+Log in as admin to add products to the system.  
 
-3. Rebuild the project.
+### 2. Cashier Login  
+Log in to handle customer purchases and process payments.  
 
+---
 
+## Username and Passwords  
 
-This will allow the application to function without generating PDF receipts on Android devices.
+- **Admin**  
+  - Username: `Admin`  
+  - Password: `password`  
 
-Technologies Used
+- **Cashier**  
+  - Username: `cashier`  
+  - Password: `password`  
 
-Flutter/Dart: Cross-platform framework for mobile and desktop development.
+---
 
-Hive: Lightweight local database for storing data.
+## Video Recording  
 
-HydratedBloc: State management with persistent theme support.
 
-Clean Architecture: Ensures a modular, maintainable, and scalable codebase.
-
-
-Installation
-
-Prerequisites
-
-Flutter SDK installed (Get Started with Flutter).
-
-
-Steps
-
-1. Clone the repository:
-
-git clone https://github.com/Ahmedx44/post_case_study
-
-
-2. Navigate to the project directory:
-
-cd pos-system
-
-
-3. Install dependencies:
-
-flutter pub get
-
-
-4. Run the app:
-
-flutter run
-
-
-
-Usage
-
-1. Admin Login:
-
-Log in as admin to add products to the system.
-
-
-
-2. Cashier Login:
-
-Log in to handle customer purchases and process payments.
-
-
-Username and Passwords
-
-Admin
-
-username = Admin
-password = password
-
-Cashier
-
-username = cashier
-password = password
 
 
