@@ -122,7 +122,7 @@ class ItemPage extends StatelessWidget {
   }
 
   Widget _buildItemCard(ItemModel item, BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100,
       child: Card(
         color: Theme.of(context).colorScheme.secondary,

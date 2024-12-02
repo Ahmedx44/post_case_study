@@ -83,7 +83,7 @@ class AdminDrawer extends StatelessWidget {
                     },
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 BlocBuilder<ThemeCubit, ThemeMode>(
                   builder: (context, themeMode) {
                     final isDarkMode = themeMode == ThemeMode.dark;

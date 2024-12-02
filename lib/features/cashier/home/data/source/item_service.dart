@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
 import 'package:post_case_study/features/cashier/home/data/model/item.dart';
-import 'package:post_case_study/model/items.dart';
 
 abstract class ItemService {
   Future<Either<String, List>> getAllItems();

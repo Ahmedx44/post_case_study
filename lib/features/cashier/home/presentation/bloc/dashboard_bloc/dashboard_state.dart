@@ -1,5 +1,3 @@
-import 'package:post_case_study/features/cashier/home/data/model/item.dart';
-
 class DashboardState {}
 
 class DashboardStateInitial extends DashboardState {}

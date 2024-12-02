@@ -180,13 +180,13 @@ class _CashierDashboardState extends State<CashierDashboard> {
     final crossAxisCount = screenWidth > 600
         ? 4
         : screenWidth > 400
-            ? 3
+            ? 2
             : 2;
 
     final childAspectRatio = screenWidth > 600
         ? 0.7
         : screenWidth > 400
-            ? 0.9
+            ? 0.6
             : 0.8;
 
     return GridView.builder(

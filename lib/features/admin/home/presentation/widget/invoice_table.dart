@@ -73,10 +73,10 @@ class InvoiceTable extends StatelessWidget {
 
                       return DataRow(
                         color: (invoices.indexOf(invoice) % 2 == 0)
-                            ? MaterialStateProperty.all(const Color.fromARGB(
+                            ? WidgetStateProperty.all(const Color.fromARGB(
                                 255, 187, 222, 248)) // Correct usage
 
-                            : MaterialStateProperty.all(Colors.grey.shade500),
+                            : WidgetStateProperty.all(Colors.grey.shade500),
                         cells: [
                           DataCell(Text(items)),
                           DataCell(Text('\$${total.toStringAsFixed(2)}')),
