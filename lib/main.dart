@@ -7,15 +7,15 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:post_case_study/core/bloc/theme_bloc/theme_cubit.dart';
 import 'package:post_case_study/core/theme/theme.dart';
-import 'package:post_case_study/features/admin/home/presentation/page/admin_home.dart';
-import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
-import 'package:post_case_study/features/cashier/home/presentation/page/cashier_home.dart';
-import 'package:post_case_study/features/common/auth/login/presentation/page/login_screen.dart';
+import 'package:post_case_study/admin/features/home/presentation/page/admin_home.dart';
+import 'package:post_case_study/cashier/feature/home/presentation/bloc/cart_bloc/cart_cubit.dart';
+import 'package:post_case_study/cashier/feature/home/presentation/page/cashier_home.dart';
+import 'package:post_case_study/common/auth/presentation/page/login_screen.dart';
 import 'package:post_case_study/locator.dart';
 import 'package:post_case_study/preloadItem.dart';
-import 'package:post_case_study/features/cashier/home/data/model/cart_item.dart';
-import 'package:post_case_study/features/cashier/home/data/model/invoice.dart';
-import 'package:post_case_study/features/cashier/home/data/model/item.dart';
+import 'package:post_case_study/cashier/feature/home/data/model/cart_item.dart';
+import 'package:post_case_study/cashier/feature/home/data/model/invoice.dart';
+import 'package:post_case_study/cashier/feature/home/data/model/item.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

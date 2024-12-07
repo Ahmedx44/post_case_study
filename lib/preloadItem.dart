@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
-import 'package:post_case_study/features/cashier/home/data/model/item.dart';
+import 'package:post_case_study/cashier/feature/home/data/model/item.dart';
 
 Future<void> preloadItems() async {
   final itemsBox = Hive.box<Item>('items');
