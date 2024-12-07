@@ -20,9 +20,10 @@ class LoginCubit extends Cubit<LoginState> {
 
       if (username == "admin" && password == "password") {
         emit(LoginStateAdmin());
-        await prefs.setBool('auth_user', true);
+        await prefs.setString('auth_state', 'admin');
       } else if (username == "cashier" && password == "password") {
         emit(LoginStateCashier());
+        await prefs.setString('auth_state', 'cashier');
       } else {}
     } catch (e) {
       emit(LoginStateError());

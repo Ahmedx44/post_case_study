@@ -12,6 +12,8 @@ import 'package:pdf/widgets.dart' as pw;
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartStateError());
 
+  Box<CartItem> cartBox = Hive.box<CartItem>('cart');
+
   final double taxRate = 0.15; // 15% tax
 
   Future<void> addToCart(

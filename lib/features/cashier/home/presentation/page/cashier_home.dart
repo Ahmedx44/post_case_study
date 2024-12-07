@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:post_case_study/core/util/responsive.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/bloc/cashier_state.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/dashboard.dart';
@@ -32,11 +33,15 @@ class CashierHome extends StatelessWidget {
                 ),
                 actions: [
                   if (!isDesktop)
-                    IconButton(
-                      icon: const Icon(Icons.shopping_cart),
-                      onPressed: () {
-                        _showCartModal(context);
-                      },
+                    Badge(
+                      label: Text(
+                          context.read<CartCubit>().cartBox.length.toString()),
+                      child: IconButton(
+                        icon: const Icon(Icons.shopping_cart),
+                        onPressed: () {
+                          _showCartModal(context);
+                        },
+                      ),
                     ),
                 ],
               ),

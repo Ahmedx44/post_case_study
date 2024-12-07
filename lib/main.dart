@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:post_case_study/core/bloc/theme_bloc/theme_cubit.dart';
 import 'package:post_case_study/core/theme/theme.dart';
 import 'package:post_case_study/features/admin/home/presentation/page/admin_home.dart';
+import 'package:post_case_study/features/cashier/home/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:post_case_study/features/cashier/home/presentation/page/cashier_home.dart';
 import 'package:post_case_study/features/common/auth/login/presentation/page/login_screen.dart';
 import 'package:post_case_study/locator.dart';
@@ -71,8 +72,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(create: (context) => CartCubit()),
+      ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, theme) {
           return MaterialApp.router(

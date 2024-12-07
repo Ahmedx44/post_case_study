@@ -18,8 +18,6 @@ class CartWidget extends StatelessWidget {
   }
 
   Widget _buildCart(BuildContext context, CartCubit cartCubit) {
-    Box<CartItem> cartBox = Hive.box<CartItem>('cart');
-
     return Container(
       width: 350,
       decoration: BoxDecoration(
@@ -45,103 +43,115 @@ class CartWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          ValueListenableBuilder<Box<CartItem>>(
-            valueListenable: cartBox.listenable(),
-            builder: (context, box, _) {
-              List<CartItem> cartItems = box.values.toList();
+          BlocProvider(
+            create: (context) => CartCubit(),
+            child: ValueListenableBuilder<Box<CartItem>>(
+              valueListenable: context.read<CartCubit>().cartBox.listenable(),
+              builder: (context, box, _) {
+                List<CartItem> cartItems = box.values.toList();
 
-              return Expanded(
-                child: cartItems.isEmpty
-                    ? const Center(child: Text('No items in the cart'))
-                    : ListView.builder(
-                        itemCount: cartItems.length,
-                        itemBuilder: (context, index) {
-                          final cartItem = cartItems[index];
-                          return Card(
-                            elevation: 2,
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            child: ListTile(
-                              leading: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: ExtendedImage.network(
-                                  cartItem.imageUrl,
-                                  fit: BoxFit.cover,
-                                  width: 60,
-                                  height: 60,
-                                ),
-                              ),
-                              title: Text(
-                                cartItem.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Price: \$${cartItem.price.toStringAsFixed(2)}',
-                                    style: const TextStyle(fontSize: 14),
+                return Expanded(
+                  child: cartItems.isEmpty
+                      ? const Center(child: Text('No items in the cart'))
+                      : ListView.builder(
+                          itemCount: cartItems.length,
+                          itemBuilder: (context, index) {
+                            final cartItem = cartItems[index];
+                            return Card(
+                              elevation: 2,
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: ListTile(
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: ExtendedImage.network(
+                                    cartItem.imageUrl,
+                                    fit: BoxFit.cover,
+                                    width: 60,
+                                    height: 60,
                                   ),
-                                ],
+                                ),
+                                title: Text(
+                                  cartItem.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Price: \$${cartItem.price.toStringAsFixed(2)}',
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.remove_circle),
+                                  onPressed: () {
+                                    context
+                                        .read<CartCubit>()
+                                        .cartBox
+                                        .deleteAt(index);
+                                  },
+                                ),
                               ),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.remove_circle),
-                                onPressed: () {
-                                  cartBox.deleteAt(index);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-              );
-            },
+                            );
+                          },
+                        ),
+                );
+              },
+            ),
           ),
           const Divider(),
-          ValueListenableBuilder<Box<CartItem>>(
-            valueListenable: cartBox.listenable(),
-            builder: (context, box, _) {
-              List<CartItem> cartItems = box.values.toList();
-              double subTotal = cartCubit.calculateSubTotal(cartItems);
-              double tax = subTotal * cartCubit.taxRate;
-              double total = subTotal + tax; // Updated calculation
+          BlocProvider(
+            create: (context) => CartCubit(),
+            child: ValueListenableBuilder<Box<CartItem>>(
+              valueListenable: context.read<CartCubit>().cartBox.listenable(),
+              builder: (context, box, _) {
+                List<CartItem> cartItems = box.values.toList();
+                double subTotal = cartCubit.calculateSubTotal(cartItems);
+                double tax = subTotal * cartCubit.taxRate;
+                double total = subTotal + tax; // Updated calculation
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSummaryRow('Subtotal:', subTotal),
-                  _buildSummaryRow('Tax (15%):', tax),
-                  const Divider(),
-                  _buildSummaryRow(
-                    'Total:',
-                    total,
-                    isBold: true,
-                    fontSize: 18,
-                  ),
-                ],
-              );
-            },
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildSummaryRow('Subtotal:', subTotal),
+                    _buildSummaryRow('Tax (15%):', tax),
+                    const Divider(),
+                    _buildSummaryRow(
+                      'Total:',
+                      total,
+                      isBold: true,
+                      fontSize: 18,
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
           const SizedBox(height: 16),
-          GestureDetector(
-            onTap: () {
-              cartCubit.handleCheckout(cartBox);
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Center(
-                child: Text(
-                  'Checkout',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
+          BlocProvider(
+            create: (context) => CartCubit(),
+            child: GestureDetector(
+              onTap: () {
+                cartCubit.handleCheckout(context.read<CartCubit>().cartBox);
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Center(
+                  child: Text(
+                    'Checkout',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
               ),
