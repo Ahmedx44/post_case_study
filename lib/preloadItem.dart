@@ -11,7 +11,6 @@ Future<void> preloadItems() async {
         await rootBundle.loadString('assets/json_item_data.json');
     final List<dynamic> jsonData = json.decode(jsonString);
 
-    //parsing and saving it to hive
     for (var category in jsonData) {
       for (var item in category['items']) {
         itemsBox.add(Item(

@@ -36,19 +36,18 @@ class CashierHome extends StatelessWidget {
                   if (!isDesktop)
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: ValueListenableBuilder(
-                          valueListenable:
-                              context.read<CartCubit>().cartBox.listenable(),
-                          builder: (context, value, child) {
-                            return Badge(
-                                label: Text(value.length.toString()),
-                                child: IconButton(
-                                  icon: const Icon(Icons.shopping_cart),
-                                  onPressed: () {
-                                    _showCartModal(context);
-                                  },
-                                ));
-                          }),
+                      child: Badge(
+                          label: Text(context
+                              .read<CartCubit>()
+                              .cartBox
+                              .length
+                              .toString()),
+                          child: IconButton(
+                            icon: const Icon(Icons.shopping_cart),
+                            onPressed: () {
+                              _showCartModal(context);
+                            },
+                          )),
                     ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:post_case_study/cashier/feature/home/domain/entity/cart_item_enitity.dart';
 
 part 'cart_item.g.dart';
 
@@ -22,4 +23,13 @@ class CartItem extends HiveObject {
     required this.imageUrl,
     required this.category,
   });
+
+  CartItemEntity toEntity() {
+    return CartItemEntity(
+      name: name,
+      price: price,
+      imageUrl: imageUrl,
+      category: category,
+    );
+  }
 }
